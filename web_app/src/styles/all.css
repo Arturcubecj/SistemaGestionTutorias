@@ -1,0 +1,223 @@
+/* CSS DEL LOGIN */
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3d35a1; 
+  padding: 1rem;
+
+}
+
+body {
+  background-color: #1a1740; 
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background-color: #e9e7f8;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+}
+
+.login-card h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+
+.login-card .sub {
+  font-size: 0.875rem;
+  color: #6b7280;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.alert {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.alert-info {
+  background-color: #eff6ff;
+  color: #1d4ed8;
+}
+
+.alert-error {
+  background-color: #fef2f2;
+  color: #b91c1c;
+}
+
+.field {
+  margin-bottom: 1rem;
+}
+
+.field label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+
+.field input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: all 0.2s;
+  color: #1f2937;
+  box-sizing: border-box;
+}
+
+.field input:focus {
+  border-color: #000000;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.btn {
+  width: 100%;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border: none;
+}
+
+.btn-login {
+  background-color: #3d35a1;
+  color: #ffffff;
+  margin-top: 0.5em;
+}
+
+.btn-login:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+}
+
+.btn-login:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+.btn-reset {
+  background-color: #3d35a1;
+  color: #ffffff;
+  margin-top: 0.5em;
+  width: 75%;
+  display: block;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.btn-reset:hover {
+  background-color: #ffffff;
+  color: #000000;
+  border: 1px solid #000000;
+}
+
+.btn-reset:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+.login-demo {
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  color: #4b5563;
+  border: 1px solid #f3f4f6;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-input {
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 1rem !important; 
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  outline: none;
+  transition: all 0.2s;
+  color: #1f2937;
+  box-sizing: border-box; 
+}
+
+
+.password-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.password-toggle-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%); 
+  cursor: pointer;
+  font-size: 1.1rem;
+  user-select: none;
+  color: #6b7280;
+  display: flex;
+  align-items: center;
+}
+
+
+/* --- ESTILOS PARA LOS DASHBOARDS --- */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  font-family: sans-serif;
+  background: #f4f6f9;
+}
+
+.sidebar-simple {
+  width: 220px;
+  background: #1e293b;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.main-simple {
+  flex-grow: 1;
+  padding: 30px;
+}
+
+.btn-salir {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* CSS PARA LOS OJOS */
+
+.ojoabierto  {
+  color: #3d35a1;
+}
+
+.ojocerrado  {
+  color: #3d35a1;
+}
