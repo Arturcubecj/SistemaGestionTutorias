@@ -6,7 +6,6 @@
   justify-content: center;
   background-color: #3d35a1; 
   padding: 1rem;
-
 }
 
 body {
@@ -46,20 +45,15 @@ body {
   margin-bottom: 1rem;
 }
 
-.alert-info {
-  background-color: #eff6ff;
-  color: #1d4ed8;
-}
+.alert-info { 
+    background-color: #eff6ff; 
+    color: #1d4ed8; }
 
-.alert-error {
-  background-color: #fef2f2;
-  color: #b91c1c;
-}
+.alert-error { 
+    background-color: #fef2f2; 
+    color: #b91c1c; }
 
-.field {
-  margin-bottom: 1rem;
-}
-
+.field { margin-bottom: 1rem; }
 .field label {
   display: block;
   font-size: 0.875rem;
@@ -94,21 +88,21 @@ body {
   border: none;
 }
 
-.btn-login {
-  background-color: #3d35a1;
-  color: #ffffff;
-  margin-top: 0.5em;
+.btn-login { 
+    background-color: #3d35a1; 
+    color: #ffffff; 
+    margin-top: 0.5em; 
+}
+.btn-login:hover { 
+    background-color: #ffffff; 
+    color: #000000; 
+    border: 1px solid #000000; 
 }
 
-.btn-login:hover {
-  background-color: #ffffff;
-  color: #000000;
-  border: 1px solid #000000;
-}
 
-.btn-login:disabled {
-  background-color: #93c5fd;
-  cursor: not-allowed;
+.btn-login:disabled { 
+    background-color: #93c5fd; 
+    cursor: not-allowed; 
 }
 
 .btn-reset {
@@ -121,15 +115,15 @@ body {
   margin-right:auto;
 }
 
-.btn-reset:hover {
-  background-color: #ffffff;
-  color: #000000;
-  border: 1px solid #000000;
-}
+.btn-reset:hover { 
+    background-color: #ffffff; 
+    color: #000000; 
+    border: 1px solid #000000;
+ }
 
-.btn-reset:disabled {
-  background-color: #93c5fd;
-  cursor: not-allowed;
+.btn-reset:disabled { 
+    background-color: #93c5fd; 
+    cursor: not-allowed; 
 }
 
 .login-demo {
@@ -160,7 +154,6 @@ body {
   box-sizing: border-box; 
 }
 
-
 .password-input:focus {
   border-color: #3b82f6;
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
@@ -179,45 +172,11 @@ body {
   align-items: center;
 }
 
-
-/* --- ESTILOS PARA LOS DASHBOARDS --- */
-.dashboard-layout {
-  display: flex;
-  min-height: 100vh;
-  font-family: sans-serif;
-  background: #f4f6f9;
-}
-
-.sidebar-simple {
-  width: 220px;
-  background: #1e293b;
-  color: white;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.main-simple {
-  flex-grow: 1;
-  padding: 30px;
-}
-
-.btn-salir {
-  background: #ef4444;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
 /* CSS PARA LOS OJOS */
-
-.ojoabierto  {
+.ojoabierto {
   color: #3d35a1;
 }
 
-.ojocerrado  {
+.ojocerrado {
   color: #3d35a1;
 }
