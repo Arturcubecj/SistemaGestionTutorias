@@ -8,7 +8,7 @@ Universidad de Guayaquil.
 - Espinosa Feijoo Anderson
 - Leon Tubay Jose
 - Rueda Encalada Alejandra
-- ...
+- Franco Cruz Edwin Elieser 
 - ...
 
 ## Tecnologías
