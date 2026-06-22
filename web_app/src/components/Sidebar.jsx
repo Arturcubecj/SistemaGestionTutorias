@@ -10,7 +10,7 @@ export default function Sidebar({ titulo = "", menuEstructurado = [] }) {
     <aside className={`sidebar-container ${colapsado ? 'collapsed' : ''}`}>
       <div>
         
-        {/* Cabecera del Sideba */}
+        {/* Cabecera del Sidebar */}
         <div className="sidebar-brand-container">
           <button 
             type="button"
