@@ -14,7 +14,7 @@ export default function AdminDashboard() {
     {
       categoria: 'GENERAL',
       items: [
-        { nombre: 'Inicio', ruta: '/dashboards/admin', icono: 'bi-house-door' },
+        { nombre: 'Inicio', ruta: '/dashboards/administrador', icono: 'bi-house-door' },
       ]
     },
     {
@@ -28,14 +28,14 @@ export default function AdminDashboard() {
         { nombre: 'Estudiantes', ruta: '/dashboards/administrador/estudiantes', icono: 'bi-people' },
       ]
     },
-    {
-      categoria: 'SEGURIDAD',
-      items: [
-        { nombre: 'Usuarios', ruta: '/dashboards/administrador/usuarios', icono: 'bi-person-gear' },
-        { nombre: 'Roles y Permisos', ruta: '/dashboards/administrador/roles', icono: 'bi-shield-lock' },
-        { nombre: 'Auditoría', ruta: '/dashboards/administrador/auditoria', icono: 'bi-journal-text' },
-      ]
-    },
+    // {
+    //   categoria: 'SEGURIDAD',
+    //   items: [
+    //     { nombre: 'Usuarios', ruta: '/dashboards/administrador/usuarios', icono: 'bi-person-gear' },
+    //     { nombre: 'Roles y Permisos', ruta: '/dashboards/administrador/roles', icono: 'bi-shield-lock' },
+    //     { nombre: 'Auditoría', ruta: '/dashboards/administrador/auditoria', icono: 'bi-journal-text' },
+    //   ]
+    // },
     {
       categoria: 'TUTORÍAS',
       items: [
