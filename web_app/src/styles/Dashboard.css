@@ -108,6 +108,8 @@
 .sidebar-container {
   width: 280px;
   height: 100vh;
+  position: sticky;   /* <-- esto */
+  top: 0;             /* <-- esto */
   background-color: #1a1740;
   color: #ffffff;
   display: flex;
@@ -116,6 +118,16 @@
   padding: 30px 20px;
   box-sizing: border-box;
   transition: width 0.3s ease, padding 0.3s ease;
+  overflow-y: auto;   /* <-- esto, para que el sidebar tenga su propio scroll si tiene muchos items */
+}
+
+/* Complementario del siderbar-container */
+.sidebar-container::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar-container {
+  scrollbar-width: none; /* Firefox */
 }
 
 .sidebar-brand {
