@@ -1,0 +1,212 @@
+/* Estudiantes */
+.estudiantes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.estudiantes-title {
+  margin: 0;
+}
+
+.estudiantes-subtitle {
+  color: #64748b;
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+.btn-nuevo-estudiante {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #d4af37;
+  color: #1e293b;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.estudiantes-search-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.estudiantes-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 14px;
+  width: 280px;
+  color: #64748b;
+}
+
+.estudiantes-search-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 0.9rem;
+  color: #334155;
+  background: transparent;
+}
+
+.estudiantes-table-container {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.estudiantes-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.estudiantes-table-head-row {
+  background: #f1f5f9;
+}
+
+.estudiantes-table-head {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #475569;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.estudiantes-table-row {
+  border-top: 1px solid #f1f5f9;
+}
+
+.estudiantes-table-cell {
+  padding: 14px 16px;
+  color: #334155;
+}
+
+.estudiantes-table-email {
+  padding: 14px 16px;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+.estudiante-nombre {
+  font-weight: 500;
+}
+
+.estudiante-estado-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.estudiante-estado-activo {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.estudiante-estado-inactivo {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.estudiantes-acciones-container {
+  display: flex;
+  gap: 8px;
+}
+
+.estudiante-btn-accion {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.estudiante-btn-editar {
+  color: #3b82f6;
+}
+
+.estudiante-btn-eliminar {
+  color: #ef4444;
+}
+
+.estudiantes-sin-resultados {
+  text-align: center;
+  padding: 40px;
+  color: #94a3b8;
+}
+
+
+
+
+
+/* Formulario de Estudiantes */
+.formulario-estudiante {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.estudiante-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+
+
+
+/* Eliminar Estudiante */
+.eliminar-estudiante-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.eliminar-estudiante-icon {
+  font-size: 2.5rem;
+  color: #ef4444;
+}
+
+.eliminar-estudiante-text {
+  color: #475569;
+  margin: 0;
+}
+
+.eliminar-estudiante-nombre {
+  color: #0f172a;
+}
+
+.btn-confirmar-eliminar-estudiante {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: none;
+  background: #ef4444;
+  color: white;
+}
+
+.btn-confirmar-eliminar-estudiante:hover {
+  opacity: 0.9;
+}

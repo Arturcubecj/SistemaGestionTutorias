@@ -1,0 +1,308 @@
+/* Inicio */
+.dashboard-subtitle {
+  color: #64748b;
+  margin-top: -5px;
+}
+
+
+
+/* Gestion de usuarios   */
+.tabla-gestion-usuarios {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.tabla-header {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.tabla-header th {
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.tabla-fila {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tabla-fila td {
+  padding: 10px 12px;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.usuario-email {
+  color: #64748b !important;
+  font-size: 0.82rem;
+}
+
+.badge-rol {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.badge-estudiante {
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+}
+
+.badge-docente {
+  background: rgba(14, 165, 233, 0.12);
+  color: #0ea5e9;
+}
+
+.badge-administrador {
+  background: rgba(212, 175, 55, 0.12);
+  color: #d4af37;
+}
+
+.estado-activo {
+  color: #22c55e;
+  font-weight: 600;
+}
+
+.estado-inactivo {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.btn-toggle-estado {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: #334155;
+  transition: all 0.2s ease;
+}
+
+.btn-toggle-estado:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.sin-resultados {
+  color: #94a3b8;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.form-actions-usuarios {
+  margin-top: 20px;
+}
+
+
+
+
+/* Metricas IA */
+.metricas-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.metrica-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.metrica-icono {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.metrica-icono.consultas {
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+}
+
+.metrica-icono.resueltas {
+  background: rgba(34, 197, 94, 0.12);
+  color: #22c55e;
+}
+
+.metrica-icono.escaladas {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+}
+
+.metrica-icono.sin-respuesta {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+}
+
+.metrica-valor {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.metrica-label {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.metricas-titulo {
+  margin: 0 0 12px;
+  color: #1e293b;
+  font-size: 0.95rem;
+}
+
+.tabla-metricas {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.tabla-metricas-header {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.tabla-metricas-header th {
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.tabla-metricas-fila {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tabla-metricas-fila td {
+  padding: 10px 12px;
+  color: #334155;
+}
+
+.pregunta-texto {
+  color: #64748b !important;
+}
+
+.fecha-texto {
+  color: #94a3b8 !important;
+}
+
+.estado-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.78rem;
+}
+
+.estado-resuelta {
+  background: rgba(34, 197, 94, 0.12);
+  color: #22c55e;
+}
+
+.estado-escalada {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+}
+
+.estado-sin-respuesta {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+}
+
+.metricas-actions {
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .metricas-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+/* Reportes Tutorias */
+.tabla-reporte-tutorias {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  margin-top: 8px;
+}
+
+.tabla-reporte-header {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.tabla-reporte-header th {
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.tabla-reporte-fila {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tabla-reporte-fila td {
+  padding: 10px 12px;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.badge-estado {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.estado-atendida {
+  background: rgba(34, 197, 94, 0.12);
+  color: #22c55e;
+}
+
+.estado-confirmada {
+  background: rgba(59, 130, 246, 0.12);
+  color: #3b82f6;
+}
+
+.estado-pendiente {
+  background: rgba(245, 158, 11, 0.12);
+  color: #f59e0b;
+}
+
+.estado-cancelada {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+}
+
+.reporte-sin-resultados {
+  text-align: center;
+  margin-top: 20px;
+  color: #94a3b8;
+}
+
+.reporte-actions {
+  margin-top: 20px;
+}
+
+
+

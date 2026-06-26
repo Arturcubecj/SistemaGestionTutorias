@@ -1,0 +1,612 @@
+/* tutorias supervicion */
+.tutorias-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.tutorias-title {
+  margin: 0;
+}
+
+.tutorias-subtitle {
+  color: #64748b;
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+
+.tutorias-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.estado-filtros {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filtro-estado-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid #e2e8f0;
+  background: white;
+  color: #475569;
+  transition: all 0.2s ease;
+}
+
+.filtro-estado-btn.activo {
+  border: none;
+}
+
+.estado-solicitada {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.estado-pendiente {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+.estado-confirmada {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.estado-atendida {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.estado-cancelada {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.estado-no-asistida {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.tutorias-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 14px;
+  width: 280px;
+  color: #64748b;
+}
+
+.tutorias-search-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 0.9rem;
+  color: #334155;
+  background: transparent;
+}
+
+.tutorias-table-wrapper {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tutorias-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.tutorias-table thead tr {
+  background: #f1f5f9;
+}
+
+.tutorias-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #475569;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tutorias-table tbody tr {
+  border-top: 1px solid #f1f5f9;
+}
+
+.tutorias-table td {
+  padding: 14px 16px;
+  color: #334155;
+}
+
+.estudiante-cell {
+  font-weight: 500;
+}
+
+.tipo-badge,
+.estado-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.tipo-individual {
+  background: #f0f9ff;
+  color: #0369a1;
+}
+
+.tipo-grupal {
+  background: #fdf4ff;
+  color: #7e22ce;
+}
+
+.acciones-container {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-ver {
+  color: #6366f1;
+}
+
+.btn-eliminar {
+  color: #ef4444;
+}
+
+.btn-icon:hover {
+  background: #f8fafc;
+}
+
+.empty-state-table {
+  text-align: center;
+  padding: 40px;
+  color: #94a3b8;
+}
+
+
+/* Detalle Tutoria */
+.detalle-tutoria {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+.detalle-estado-container {
+  display: flex;
+  justify-content: center;
+}
+
+.estado-badge {
+  padding: 6px 20px;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.estado-solicitada {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.estado-pendiente {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+.estado-confirmada {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.estado-atendida {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.estado-cancelada {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.estado-no-asistida {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.detalle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.detalle-campo {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.detalle-campo-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.detalle-campo-label i {
+  margin-right: 5px;
+}
+
+.detalle-campo-valor {
+  color: #1e293b;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.observaciones-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.observaciones-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #6366f1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.observaciones-title i {
+  margin-right: 6px;
+}
+
+.observaciones-text {
+  margin: 0;
+  color: #334155;
+  font-size: 0.9rem;
+}
+
+.sin-observaciones {
+  color: #94a3b8;
+}
+
+@media (max-width: 768px) {
+  .detalle-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Eliminar Tutoria */
+.eliminar-tutoria {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.eliminar-icono {
+  font-size: 2.5rem;
+  color: #ef4444;
+}
+
+.eliminar-texto {
+  color: #475569;
+  margin: 0;
+}
+
+.eliminar-dato {
+  color: #0f172a;
+}
+
+.btn-eliminar-confirmar {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: none;
+  background: #ef4444;
+  color: white;
+  transition: background 0.2s ease;
+}
+
+.btn-eliminar-confirmar:hover {
+  background: #dc2626;
+}
+
+
+
+/*Reportes de tutorias */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+ 
+.page-title {
+  margin: 0;
+}
+ 
+.page-subtitle {
+  color: #64748b;
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+ 
+/* ===== BOTONES DE EXPORTACIÓN ===== */
+.export-buttons {
+  display: flex;
+  gap: 10px;
+}
+ 
+.btn-excel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #16a34a;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+ 
+.btn-pdf {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+ 
+/* ===== TARJETAS RESUMEN ===== */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+ 
+.summary-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+ 
+.summary-icon {
+  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+ 
+.summary-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+ 
+.summary-label {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+ 
+/* ===== TABS ===== */
+.tabs-container {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e2e8f0;
+}
+ 
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #64748b;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+}
+ 
+.tab-btn.active {
+  color: #6366f1;
+  border-bottom-color: #6366f1;
+}
+ 
+/* ===== BUSCADOR ===== */
+.search-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+ 
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 8px 14px;
+  width: 280px;
+  color: #64748b;
+}
+ 
+.search-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 0.9rem;
+  color: #334155;
+  background: transparent;
+}
+ 
+.search-clear {
+  cursor: pointer;
+  color: #94a3b8;
+}
+ 
+/* ===== TABLAS ===== */
+.table-wrapper {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+ 
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+ 
+.report-table thead {
+  background: #f1f5f9;
+}
+ 
+.report-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: #475569;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+ 
+.report-table td {
+  padding: 14px 16px;
+  color: #334155;
+}
+ 
+.report-table tbody tr {
+  border-top: 1px solid #f1f5f9;
+}
+ 
+.report-table .td-muted {
+  color: #64748b;
+}
+ 
+.report-table .td-bold {
+  font-weight: 500;
+}
+ 
+.empty-row td {
+  text-align: center;
+  padding: 40px;
+  color: #94a3b8;
+}
+ 
+/* ===== BADGES ===== */
+.badge-green  { color: #16a34a; font-weight: 600; }
+.badge-blue   { color: #1d4ed8; font-weight: 600; }
+.badge-red    { color: #dc2626; font-weight: 600; }
+.badge-gray   { color: #475569; font-weight: 600; }
+.badge-bold   { color: #0f172a; font-weight: 700; }
+ 
+.chip-purple {
+  background: #ede9fe;
+  color: #7c3aed;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+ 
+.chip-blue {
+  background: #dbeafe;
+  color: #1d4ed8;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+ 
+/* ===== BARRA DE PROGRESO ===== */
+.progress-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+ 
+.progress-track {
+  flex: 1;
+  background: #f1f5f9;
+  border-radius: 999px;
+  height: 8px;
+  overflow: hidden;
+}
+ 
+.progress-fill {
+  height: 100%;
+  background: #6366f1;
+  border-radius: 999px;
+}
+ 
+.progress-label {
+  font-weight: 600;
+  color: #6366f1;
+  font-size: 0.85rem;
+  min-width: 36px;
+}
