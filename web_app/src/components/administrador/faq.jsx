@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Sidebar from "../../../components/Sidebar";
-import Header from "../../../components/Header";
-import Modal from "../../../components/Modal";
-import FormularioFAQ from "../../../components/administrador/agente/preguntas/FormularioFAQ";
-import EliminarFAQ from "../../../components/administrador/agente/preguntas/EliminarFAQ";
+import Sidebar from "../Sidebar";
+import Header from "../Header";
+import Modal from "../Modal";
+import FormularioFAQ from "./agente/preguntas/FormularioFAQ";
+import EliminarFAQ from "./agente/preguntas/EliminarFAQ";
 
 const menuAdminEstructurado = [
   {

@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Sidebar from "../../../components/Sidebar";
-import Header from "../../../components/Header";
-import Modal from "../../../components/Modal";
-import FormularioDocumento from "../../../components/administrador/agente/bdconocimiento/FormularioDocumento";
-import EliminarDocumento from "../../../components/administrador/agente/bdconocimiento/EliminarDocumento";
-import VistaDocumento from "../../../components/administrador/agente/bdconocimiento/VistaDocumento";
+import Sidebar from "../Sidebar";
+import Header from "../Header";
+import Modal from "../Modal";
+import FormularioDocumento from "./agente/bdconocimiento/FormularioDocumento";
+import EliminarDocumento from "./agente/bdconocimiento/EliminarDocumento";
+import VistaDocumento from "./agente/bdconocimiento/VistaDocumento";
 
 const menuAdminEstructurado = [
   {

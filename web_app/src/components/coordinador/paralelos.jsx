@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Sidebar from "../../../components/Sidebar";
-import Header from "../../../components/Header";
-import Modal from "../../../components/Modal";
-import FormularioParalelo from "../../../components/coordinador/academica/cursos/FormularioParalelo";
-import EliminarParalelo from "../../../components/coordinador/academica/cursos/EliminarParalelo";
+import Sidebar from "../Sidebar";
+import Header from "../Header";
+import Modal from "../Modal";
+import FormularioParalelo from "./academica/cursos/FormularioParalelo";
+import EliminarParalelo from "./academica/cursos/EliminarParalelo";
 
 const menuCoordinadorEstructurado = [
   {

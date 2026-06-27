@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Sidebar from "../../../components/Sidebar";
-import Header from "../../../components/Header";
-import Modal from "../../../components/Modal";
-import FormularioPeriodo from "../../../components/administrador/academica/periodos/FormularioPeriodo";
-import EliminarPeriodo from "../../../components/administrador/academica/periodos/EliminarPeriodo";
+import Sidebar from "../Sidebar";
+import Header from "../Header";
+import Modal from "../Modal";
+import FormularioAsignatura from "./academica/asignaturas/FormularioAsignatura";
+import EliminarAsignatura from "./academica/asignaturas/EliminarAsignatura";
 
 const menuAdminEstructurado = [
   {
@@ -88,85 +88,103 @@ const menuAdminEstructurado = [
   },
 ];
 
-const periodosIniciales = [
+const asignaturasIniciales = [
   {
     id: 1,
-    nombre: "Periodo 2025-2026 CI",
-    codigo: "2025-CI",
-    fechaInicio: "2025-05-01",
-    fechaFin: "2025-09-30",
-    estado: "Cerrado",
+    nombre: "Desarrollo de Aplicaciones Web",
+    codigo: "DAWA",
+    carrera: "Ingeniería en Software",
+    creditos: 4,
+    nivel: 7,
+    estado: "Activo",
   },
   {
     id: 2,
-    nombre: "Periodo 2025-2026 CII",
-    codigo: "2025-CII",
-    fechaInicio: "2025-10-01",
-    fechaFin: "2026-03-31",
-    estado: "Cerrado",
+    nombre: "Bases de Datos Relacionales",
+    codigo: "BDR",
+    carrera: "Ingeniería en Software",
+    creditos: 3,
+    nivel: 4,
+    estado: "Activo",
   },
   {
     id: 3,
-    nombre: "Periodo 2026-2027 CI",
-    codigo: "2026-CI",
-    fechaInicio: "2026-05-01",
-    fechaFin: "2026-09-30",
+    nombre: "Calidad de Software",
+    codigo: "CAS",
+    carrera: "Ingeniería en Software",
+    creditos: 3,
+    nivel: 8,
     estado: "Activo",
   },
   {
     id: 4,
-    nombre: "Periodo 2026-2027 CII",
-    codigo: "2026-CII",
-    fechaInicio: "2026-10-01",
-    fechaFin: "2027-03-31",
-    estado: "Planificado",
+    nombre: "Sistemas Operativos",
+    codigo: "SOP",
+    carrera: "Ingeniería en Sistemas",
+    creditos: 4,
+    nivel: 5,
+    estado: "Activo",
   },
+  {
+    id: 5,
+    nombre: "Anatomía Humana",
+    codigo: "ANH",
+    carrera: "Medicina",
+    creditos: 5,
+    nivel: 1,
+    estado: "Inactivo",
+  },
+];
+
+const carrerasDisponibles = [
+  "Ingeniería en Software",
+  "Ingeniería en Sistemas",
+  "Ingeniería Industrial",
+  "Medicina",
+  "Biología",
 ];
 
 const formVacio = {
   nombre: "",
   codigo: "",
-  fechaInicio: "",
-  fechaFin: "",
-  estado: "Planificado",
+  carrera: "",
+  creditos: "",
+  nivel: "",
+  estado: "Activo",
 };
 
-const colorEstado = {
-  Activo: { bg: "#dcfce7", color: "#16a34a" },
-  Planificado: { bg: "#dbeafe", color: "#1d4ed8" },
-  Cerrado: { bg: "#f1f5f9", color: "#475569" },
-};
-
-export default function PeriodosPage() {
-  const [periodos, setPeriodos] = useState(periodosIniciales);
+export default function AsignaturasPage() {
+  const [asignaturas, setAsignaturas] = useState(asignaturasIniciales);
   const [busqueda, setBusqueda] = useState("");
   const [modalAbierto, setModalAbierto] = useState(null);
   const [seleccionado, setSeleccionado] = useState(null);
   const [formData, setFormData] = useState(formVacio);
 
-  const periodosFiltrados = periodos.filter(
-    (p) =>
-      p.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
-      p.codigo.toLowerCase().includes(busqueda.toLowerCase()),
+  const asignaturasFiltradas = asignaturas.filter(
+    (a) =>
+      a.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+      a.codigo.toLowerCase().includes(busqueda.toLowerCase()) ||
+      a.carrera.toLowerCase().includes(busqueda.toLowerCase()),
   );
 
   const abrirCrear = () => {
     setFormData(formVacio);
     setModalAbierto("crear");
   };
-  const abrirEditar = (p) => {
-    setSeleccionado(p);
+  const abrirEditar = (a) => {
+    setSeleccionado(a);
     setFormData({
-      nombre: p.nombre,
-      codigo: p.codigo,
-      fechaInicio: p.fechaInicio,
-      fechaFin: p.fechaFin,
-      estado: p.estado,
+      nombre: a.nombre,
+      codigo: a.codigo,
+      carrera: a.carrera,
+      creditos: a.creditos,
+      nivel: a.nivel,
+      estado: a.estado,
     });
     setModalAbierto("editar");
   };
-  const abrirEliminar = (p) => {
-    setSeleccionado(p);
+  const abrirEliminar = (a) => {
+    setSeleccionado(a);
     setModalAbierto("eliminar");
   };
   const cerrarModal = () => {
@@ -182,20 +200,20 @@ export default function PeriodosPage() {
 
   const manejarCrear = (e) => {
     e.preventDefault();
-    setPeriodos((prev) => [...prev, { id: Date.now(), ...formData }]);
+    setAsignaturas((prev) => [...prev, { id: Date.now(), ...formData }]);
     cerrarModal();
   };
 
   const manejarEditar = (e) => {
     e.preventDefault();
-    setPeriodos((prev) =>
-      prev.map((p) => (p.id === seleccionado.id ? { ...p, ...formData } : p)),
+    setAsignaturas((prev) =>
+      prev.map((a) => (a.id === seleccionado.id ? { ...a, ...formData } : a)),
     );
     cerrarModal();
   };
 
   const manejarEliminar = () => {
-    setPeriodos((prev) => prev.filter((p) => p.id !== seleccionado.id));
+    setAsignaturas((prev) => prev.filter((a) => a.id !== seleccionado.id));
     cerrarModal();
   };
 
@@ -207,50 +225,51 @@ export default function PeriodosPage() {
         <Header />
         <main className="main-content-body">
           {/* Encabezado */}
-          <div className="periodos-header">
+          <div className="asignaturas-header">
             <div>
-              <h2 className="periodos-title">Periodos Académicos</h2>
-              <p className="periodos-subtitle">
-                Gestión de periodos académicos registrados en el sistema.
+              <h2 className="asignaturas-title">Asignaturas</h2>
+              <p className="asignaturas-subtitle">
+                Gestión de asignaturas registradas en el sistema.
               </p>
             </div>
 
-            <button onClick={abrirCrear} className="btn-nuevo-periodo">
+            <button onClick={abrirCrear} className="btn-nueva-asignatura">
               <i className="bi bi-plus-lg"></i>
-              Nuevo Periodo
+              Nueva Asignatura
             </button>
           </div>
 
           {/* Buscador */}
-          <div className="periodos-search-container">
-            <div className="periodos-search-box">
+          <div className="asignaturas-search-container">
+            <div className="asignaturas-search-box">
               <i className="bi bi-search"></i>
 
               <input
                 type="text"
-                placeholder="Buscar periodo..."
+                placeholder="Buscar asignatura..."
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
-                className="periodos-search-input"
+                className="asignaturas-search-input"
               />
             </div>
           </div>
 
           {/* Tabla */}
-          <div className="periodos-table-container">
-            <table className="periodos-table">
+          <div className="asignaturas-table-container">
+            <table className="asignaturas-table">
               <thead>
-                <tr className="periodos-table-header-row">
+                <tr className="asignaturas-table-header-row">
                   {[
                     "#",
                     "Nombre",
                     "Código",
-                    "Fecha Inicio",
-                    "Fecha Fin",
+                    "Carrera",
+                    "Créditos",
+                    "Nivel",
                     "Estado",
                     "Acciones",
                   ].map((h) => (
-                    <th key={h} className="periodos-table-header">
+                    <th key={h} className="asignaturas-table-header">
                       {h}
                     </th>
                   ))}
@@ -258,31 +277,32 @@ export default function PeriodosPage() {
               </thead>
 
               <tbody>
-                {periodosFiltrados.length > 0 ? (
-                  periodosFiltrados.map((p, i) => (
-                    <tr key={p.id} className="periodos-table-row">
-                      <td className="periodos-table-cell">{i + 1}</td>
-                      <td className="periodos-table-cell">{p.nombre}</td>
-                      <td className="periodos-table-cell">{p.codigo}</td>
-                      <td className="periodos-table-cell">{p.fechaInicio}</td>
-                      <td className="periodos-table-cell">{p.fechaFin}</td>
+                {asignaturasFiltradas.length > 0 ? (
+                  asignaturasFiltradas.map((a, i) => (
+                    <tr key={a.id} className="asignaturas-table-row">
+                      <td className="asignaturas-table-cell">{i + 1}</td>
+                      <td className="asignaturas-table-cell">{a.nombre}</td>
+                      <td className="asignaturas-table-cell">{a.codigo}</td>
+                      <td className="asignaturas-table-cell">{a.carrera}</td>
+                      <td className="asignaturas-table-cell">{a.creditos}</td>
+                      <td className="asignaturas-table-cell">{a.nivel}</td>
 
-                      <td className="periodos-table-cell">
+                      <td className="asignaturas-table-cell">
                         <span
-                          className="estado-badge"
-                          style={{
-                            background: colorEstado[p.estado]?.bg,
-                            color: colorEstado[p.estado]?.color,
-                          }}
+                          className={`estado-badge ${
+                            a.estado === "Activo"
+                              ? "estado-activo"
+                              : "estado-inactivo"
+                          }`}
                         >
-                          {p.estado}
+                          {a.estado}
                         </span>
                       </td>
 
-                      <td className="periodos-table-cell">
+                      <td className="asignaturas-table-cell">
                         <div className="acciones-container">
                           <button
-                            onClick={() => abrirEditar(p)}
+                            onClick={() => abrirEditar(a)}
                             title="Editar"
                             className="btn-accion btn-editar"
                           >
@@ -290,7 +310,7 @@ export default function PeriodosPage() {
                           </button>
 
                           <button
-                            onClick={() => abrirEliminar(p)}
+                            onClick={() => abrirEliminar(a)}
                             title="Eliminar"
                             className="btn-accion btn-eliminar"
                           >
@@ -302,8 +322,8 @@ export default function PeriodosPage() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="7" className="sin-registros">
-                      No se encontraron periodos.
+                    <td colSpan="8" className="sin-registros">
+                      No se encontraron asignaturas.
                     </td>
                   </tr>
                 )}
@@ -316,38 +336,40 @@ export default function PeriodosPage() {
       <Modal
         isOpen={modalAbierto === "crear"}
         onClose={cerrarModal}
-        titulo="Nuevo Periodo Académico"
+        titulo="Nueva Asignatura"
       >
-        <FormularioPeriodo
+        <FormularioAsignatura
           formData={formData}
           onChange={manejarCambio}
           onSubmit={manejarCrear}
           onCancelar={cerrarModal}
           textoBoton="Guardar"
+          carreras={carrerasDisponibles}
         />
       </Modal>
 
       <Modal
         isOpen={modalAbierto === "editar"}
         onClose={cerrarModal}
-        titulo="Editar Periodo Académico"
+        titulo="Editar Asignatura"
       >
-        <FormularioPeriodo
+        <FormularioAsignatura
           formData={formData}
           onChange={manejarCambio}
           onSubmit={manejarEditar}
           onCancelar={cerrarModal}
           textoBoton="Guardar Cambios"
+          carreras={carrerasDisponibles}
         />
       </Modal>
 
       <Modal
         isOpen={modalAbierto === "eliminar"}
         onClose={cerrarModal}
-        titulo="Eliminar Periodo Académico"
+        titulo="Eliminar Asignatura"
       >
-        <EliminarPeriodo
-          periodo={seleccionado}
+        <EliminarAsignatura
+          asignatura={seleccionado}
           onConfirmar={manejarEliminar}
           onCancelar={cerrarModal}
         />

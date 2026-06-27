@@ -1,92 +1,92 @@
 import { useState } from "react";
-import Sidebar from "../../../components/Sidebar";
-import Header from "../../../components/Header";
-import Modal from "../../../components/Modal";
-import FormularioAsignatura from "../../../components/administrador/academica/asignaturas/FormularioAsignatura";
-import EliminarAsignatura from "../../../components/administrador/academica/asignaturas/EliminarAsignatura";
+import Sidebar from "../Sidebar";
+import Header from "../Header";
+import Modal from "../Modal";
+import FormularioAsignatura from "../administrador/academica/asignaturas/FormularioAsignatura";
+import EliminarAsignatura from "../administrador/academica/asignaturas/EliminarAsignatura";
 
-const menuAdminEstructurado = [
-  {
-    categoria: "GENERAL",
-    items: [
-      {
-        nombre: "Inicio",
-        ruta: "/dashboards/administrador",
-        icono: "bi-house-door",
-      },
-    ],
-  },
-  {
-    categoria: "ADMINISTRACIÓN ACADÉMICA",
-    items: [
-      {
-        nombre: "Facultades",
-        ruta: "/dashboards/administrador/facultades",
-        icono: "bi-building",
-      },
-      {
-        nombre: "Carreras",
-        ruta: "/dashboards/administrador/carreras",
-        icono: "bi-diagram-3",
-      },
-      {
-        nombre: "Asignaturas",
-        ruta: "/dashboards/administrador/asignaturas",
-        icono: "bi-book",
-      },
-      {
-        nombre: "Periodos Académicos",
-        ruta: "/dashboards/administrador/periodos",
-        icono: "bi-calendar3",
-      },
-      {
-        nombre: "Docentes",
-        ruta: "/dashboards/administrador/docentes",
-        icono: "bi-person-badge",
-      },
-      {
-        nombre: "Estudiantes",
-        ruta: "/dashboards/administrador/estudiantes",
-        icono: "bi-people",
-      },
-    ],
-  },
-  {
-    categoria: "TUTORÍAS",
-    items: [
-      {
-        nombre: "Supervisar Tutorías",
-        ruta: "/dashboards/administrador/tutorias",
-        icono: "bi-calendar-check",
-      },
-      {
-        nombre: "Reportes",
-        ruta: "/dashboards/administrador/reportes",
-        icono: "bi-file-earmark-bar-graph",
-      },
-    ],
-  },
-  {
-    categoria: "AGENTE IA",
-    items: [
-      {
-        nombre: "Métricas de uso IA",
-        ruta: "/dashboards/administrador/metricas",
-        icono: "bi-graph-up",
-      },
-      {
-        nombre: "Preguntas Frecuentes",
-        ruta: "/dashboards/administrador/faq",
-        icono: "bi-question-circle",
-      },
-      {
-        nombre: "Base de Conocimiento",
-        ruta: "/dashboards/administrador/conocimiento",
-        icono: "bi-database",
-      },
-    ],
-  },
-];
+const menuCoordinadorEstructurado = [
+    {
+      categoria: "GENERAL",
+      items: [
+        {
+          nombre: "Inicio",
+          ruta: "/dashboards/coordinador",
+          icono: "bi-house-door",
+        },
+      ],
+    },
+    {
+      categoria: "ADMINISTRACIÓN ACADÉMICA",
+      items: [
+        {
+          nombre: "Docentes",
+          ruta: "/dashboards/coordinador/docentes",
+          icono: "bi-person-badge",
+        },
+        {
+          nombre: "Estudiantes",
+          ruta: "/dashboards/coordinador/estudiantes",
+          icono: "bi-people",
+        },
+        {
+          nombre: "Asignaturas",
+          ruta: "/dashboards/coordinador/asignaturas",
+          icono: "bi-book",
+        },
+        {
+          nombre: "Paralelos",
+          ruta: "/dashboards/coordinador/paralelos",
+          icono: "bi-diagram-3",
+        },
+        {
+          nombre: "Periodos Académicos",
+          ruta: "/dashboards/coordinador/periodos",
+          icono: "bi-calendar3",
+        },
+      ],
+    },
+    {
+      categoria: "TUTORÍAS",
+      items: [
+        {
+          nombre: "Supervisar Tutorías",
+          ruta: "/dashboards/coordinador/tutorias",
+          icono: "bi-calendar-check",
+        },
+        {
+          nombre: "Reportes",
+          ruta: "/dashboards/coordinador/reportes",
+          icono: "bi-file-earmark-bar-graph",
+        },
+        {
+          nombre: "Casos Escalados",
+          ruta: "/dashboards/coordinador/casos-escalados",
+          icono: "bi-exclamation-circle",
+        },
+      ],
+    },
+    {
+      categoria: "AGENTE IA",
+      items: [
+        {
+          nombre: "Métricas de uso IA",
+          ruta: "/dashboards/coordinador/metricas",
+          icono: "bi-graph-up",
+        },
+        {
+          nombre: "Preguntas Frecuentes",
+          ruta: "/dashboards/coordinador/faq",
+          icono: "bi-question-circle",
+        },
+        {
+          nombre: "Base de Conocimiento",
+          ruta: "/dashboards/coordinador/conocimiento",
+          icono: "bi-database",
+        },
+      ],
+    },
+  ];
 
 const asignaturasIniciales = [
   {
@@ -219,7 +219,7 @@ export default function AsignaturasPage() {
 
   return (
     <div className="dashboard-layout">
-      <Sidebar titulo="Menu" menuEstructurado={menuAdminEstructurado} />
+      <Sidebar titulo="Menu" menuEstructurado={menuCoordinadorEstructurado} />
 
       <div className="dashboard-viewport">
         <Header />

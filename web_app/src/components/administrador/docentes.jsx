@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Sidebar from "../../../components/Sidebar";
-import Header from "../../../components/Header";
-import Modal from "../../../components/Modal";
-import FormularioDocente from "../../../components/administrador/academica/docentes/FormularioDocente";
-import EliminarDocente from "../../../components/administrador/academica/docentes/EliminarDocente";
+import Sidebar from "../Sidebar";
+import Header from "../Header";
+import Modal from "../Modal";
+import FormularioDocente from "./academica/docentes/FormularioDocente";
+import EliminarDocente from "./academica/docentes/EliminarDocente";
 
 const menuAdminEstructurado = [
   {

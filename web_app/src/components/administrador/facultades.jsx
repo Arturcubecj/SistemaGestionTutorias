@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Sidebar from "../../../components/Sidebar";
-import Header from "../../../components/Header";
-import Modal from "../../../components/Modal";
-import FormularioEstudiante from "../../../components/administrador/academica/estudiantes/FormularioEstudiante";
-import EliminarEstudiante from "../../../components/administrador/academica/estudiantes/EliminarEstudiante";
+import Sidebar from "../Sidebar";
+import Header from "../Header";
+import Modal from "../Modal";
+import FormularioFacultad from "./academica/facultades/FormularioFacultad";
+import EliminarFacultad from "./academica/facultades/EliminarFacultad";
 
 const menuAdminEstructurado = [
   {
@@ -88,104 +88,81 @@ const menuAdminEstructurado = [
   },
 ];
 
-const estudiantesIniciales = [
+const facultadesIniciales = [
   {
     id: 1,
-    nombre: "Ana Torres",
-    cedula: "0912345678",
-    email: "a.torres@ug.edu.ec",
-    carrera: "Ingeniería en Software",
-    nivel: 7,
+    nombre: "Facultad de Ciencias Matemáticas y Físicas",
+    codigo: "FCMF",
+    decano: "Dr. Roberto Alvarado",
+    carreras: 5,
     estado: "Activo",
   },
   {
     id: 2,
-    nombre: "Luis Pérez",
-    cedula: "0923456789",
-    email: "l.perez@ug.edu.ec",
-    carrera: "Ingeniería en Sistemas",
-    nivel: 5,
+    nombre: "Facultad de Ciencias Naturales",
+    codigo: "FCN",
+    decano: "Dra. Patricia Salinas",
+    carreras: 3,
     estado: "Activo",
   },
   {
     id: 3,
-    nombre: "María Gómez",
-    cedula: "0934567890",
-    email: "m.gomez@ug.edu.ec",
-    carrera: "Ingeniería en Software",
-    nivel: 3,
+    nombre: "Facultad de Filosofía, Letras y Ciencias de la Educación",
+    codigo: "FFLCE",
+    decano: "Mg. Juan Mora",
+    carreras: 8,
     estado: "Activo",
   },
   {
     id: 4,
-    nombre: "Jorge Lema",
-    cedula: "0945678901",
-    email: "j.lema@ug.edu.ec",
-    carrera: "Medicina",
-    nivel: 2,
+    nombre: "Facultad de Ciencias Médicas",
+    codigo: "FCM",
+    decano: "Dr. Carlos Vega",
+    carreras: 4,
     estado: "Inactivo",
   },
   {
     id: 5,
-    nombre: "Carla Ríos",
-    cedula: "0956789012",
-    email: "c.rios@ug.edu.ec",
-    carrera: "Ingeniería Industrial",
-    nivel: 8,
+    nombre: "Facultad de Ingeniería Industrial",
+    codigo: "FII",
+    decano: "Ing. Sofía Reyes",
+    carreras: 6,
     estado: "Activo",
   },
 ];
 
-const carrerasDisponibles = [
-  "Ingeniería en Software",
-  "Ingeniería en Sistemas",
-  "Ingeniería Industrial",
-  "Medicina",
-  "Biología",
-];
+const formVacio = { nombre: "", codigo: "", decano: "", estado: "Activo" };
 
-const formVacio = {
-  nombre: "",
-  cedula: "",
-  email: "",
-  carrera: "",
-  nivel: "",
-  estado: "Activo",
-};
-
-export default function EstudiantesPage() {
-  const [estudiantes, setEstudiantes] = useState(estudiantesIniciales);
+export default function FacultadesPage() {
+  const [facultades, setFacultades] = useState(facultadesIniciales);
   const [busqueda, setBusqueda] = useState("");
   const [modalAbierto, setModalAbierto] = useState(null);
   const [seleccionado, setSeleccionado] = useState(null);
   const [formData, setFormData] = useState(formVacio);
 
-  const estudiantesFiltrados = estudiantes.filter(
-    (e) =>
-      e.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
-      e.cedula.includes(busqueda) ||
-      e.email.toLowerCase().includes(busqueda.toLowerCase()) ||
-      e.carrera.toLowerCase().includes(busqueda.toLowerCase()),
+  const facultadesFiltradas = facultades.filter(
+    (f) =>
+      f.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+      f.codigo.toLowerCase().includes(busqueda.toLowerCase()) ||
+      f.decano.toLowerCase().includes(busqueda.toLowerCase()),
   );
 
   const abrirCrear = () => {
     setFormData(formVacio);
     setModalAbierto("crear");
   };
-  const abrirEditar = (e) => {
-    setSeleccionado(e);
+  const abrirEditar = (f) => {
+    setSeleccionado(f);
     setFormData({
-      nombre: e.nombre,
-      cedula: e.cedula,
-      email: e.email,
-      carrera: e.carrera,
-      nivel: e.nivel,
-      estado: e.estado,
+      nombre: f.nombre,
+      codigo: f.codigo,
+      decano: f.decano,
+      estado: f.estado,
     });
     setModalAbierto("editar");
   };
-  const abrirEliminar = (e) => {
-    setSeleccionado(e);
+  const abrirEliminar = (f) => {
+    setSeleccionado(f);
     setModalAbierto("eliminar");
   };
   const cerrarModal = () => {
@@ -201,20 +178,23 @@ export default function EstudiantesPage() {
 
   const manejarCrear = (e) => {
     e.preventDefault();
-    setEstudiantes((prev) => [...prev, { id: Date.now(), ...formData }]);
+    setFacultades((prev) => [
+      ...prev,
+      { id: Date.now(), ...formData, carreras: 0 },
+    ]);
     cerrarModal();
   };
 
   const manejarEditar = (e) => {
     e.preventDefault();
-    setEstudiantes((prev) =>
-      prev.map((e) => (e.id === seleccionado.id ? { ...e, ...formData } : e)),
+    setFacultades((prev) =>
+      prev.map((f) => (f.id === seleccionado.id ? { ...f, ...formData } : f)),
     );
     cerrarModal();
   };
 
   const manejarEliminar = () => {
-    setEstudiantes((prev) => prev.filter((e) => e.id !== seleccionado.id));
+    setFacultades((prev) => prev.filter((f) => f.id !== seleccionado.id));
     cerrarModal();
   };
 
@@ -226,101 +206,106 @@ export default function EstudiantesPage() {
         <Header />
         <main className="main-content-body">
           {/* Encabezado */}
-          <div className="estudiantes-header">
+          <div className="facultades-header">
             <div>
-              <h2 className="estudiantes-title">Estudiantes</h2>
-              <p className="estudiantes-subtitle">
-                Gestión de estudiantes registrados en el sistema.
+              <h2 className="facultades-title">Facultades</h2>
+              <p className="facultades-subtitle">
+                Gestión de facultades registradas en el sistema.
               </p>
             </div>
-
-            <button onClick={abrirCrear} className="btn-nuevo-estudiante">
-              <i className="bi bi-plus-lg"></i>
-              Nuevo Estudiante
+            <button onClick={abrirCrear} className="btn-nueva-facultad">
+              <i className="bi bi-plus-lg"></i> Nueva Facultad
             </button>
           </div>
 
           {/* Buscador */}
-          <div className="estudiantes-search-container">
-            <div className="estudiantes-search-box">
+          <div className="facultades-search-container">
+            <div className="facultades-search-box">
               <i className="bi bi-search"></i>
-
               <input
                 type="text"
-                placeholder="Buscar estudiante..."
+                className="facultades-search-input"
+                placeholder="Buscar facultad..."
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
-                className="estudiantes-search-input"
               />
             </div>
           </div>
 
           {/* Tabla */}
-          <div className="estudiantes-table-container">
-            <table className="estudiantes-table">
+          <div className="facultades-table-wrapper">
+            <table className="facultades-table">
               <thead>
-                <tr className="estudiantes-table-head-row">
+                <tr style={{ background: "#f1f5f9" }}>
                   {[
                     "#",
                     "Nombre",
-                    "Cédula",
-                    "Correo",
-                    "Carrera",
-                    "Nivel",
+                    "Código",
+                    "Decano",
+                    "Carreras",
                     "Estado",
                     "Acciones",
                   ].map((h) => (
-                    <th key={h} className="estudiantes-table-head">
+                    <th
+                      key={h}
+                      style={{
+                        padding: "12px 16px",
+                        textAlign: "left",
+                        fontWeight: 600,
+                        color: "#475569",
+                        fontSize: "0.82rem",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.5px",
+                      }}
+                    >
                       {h}
                     </th>
                   ))}
                 </tr>
               </thead>
-
               <tbody>
-                {estudiantesFiltrados.length > 0 ? (
-                  estudiantesFiltrados.map((e, i) => (
-                    <tr key={e.id} className="estudiantes-table-row">
-                      <td className="estudiantes-table-cell">{i + 1}</td>
-
-                      <td className="estudiantes-table-cell estudiante-nombre">
-                        {e.nombre}
+                {facultadesFiltradas.length > 0 ? (
+                  facultadesFiltradas.map((f, i) => (
+                    <tr key={f.id} style={{ borderTop: "1px solid #f1f5f9" }}>
+                      <td style={{ padding: "14px 16px", color: "#334155" }}>
+                        {i + 1}
                       </td>
-
-                      <td className="estudiantes-table-cell">{e.cedula}</td>
-
-                      <td className="estudiantes-table-email">{e.email}</td>
-
-                      <td className="estudiantes-table-cell">{e.carrera}</td>
-
-                      <td className="estudiantes-table-cell">{e.nivel}</td>
-
-                      <td className="estudiantes-table-cell">
+                      <td style={{ padding: "14px 16px", color: "#334155" }}>
+                        {f.nombre}
+                      </td>
+                      <td style={{ padding: "14px 16px", color: "#334155" }}>
+                        {f.codigo}
+                      </td>
+                      <td style={{ padding: "14px 16px", color: "#334155" }}>
+                        {f.decano}
+                      </td>
+                      <td style={{ padding: "14px 16px", color: "#334155" }}>
+                        {f.carreras}
+                      </td>
+                      <td style={{ padding: "14px 16px" }}>
                         <span
-                          className={`estudiante-estado-badge ${
-                            e.estado === "Activo"
-                              ? "estudiante-estado-activo"
-                              : "estudiante-estado-inactivo"
+                          className={`estado-badge ${
+                            f.estado === "Activo"
+                              ? "estado-activo"
+                              : "estado-inactivo"
                           }`}
                         >
-                          {e.estado}
+                          {f.estado}
                         </span>
                       </td>
-
-                      <td className="estudiantes-table-cell">
-                        <div className="estudiantes-acciones-container">
+                      <td style={{ padding: "14px 16px" }}>
+                        <div className="acciones-container">
                           <button
-                            onClick={() => abrirEditar(e)}
+                            onClick={() => abrirEditar(f)}
                             title="Editar"
-                            className="estudiante-btn-accion estudiante-btn-editar"
+                            className="btn-icon btn-editar"
                           >
                             <i className="bi bi-pencil"></i>
                           </button>
-
                           <button
-                            onClick={() => abrirEliminar(e)}
+                            onClick={() => abrirEliminar(f)}
                             title="Eliminar"
-                            className="estudiante-btn-accion estudiante-btn-eliminar"
+                            className="btn-icon btn-eliminar"
                           >
                             <i className="bi bi-trash"></i>
                           </button>
@@ -330,8 +315,8 @@ export default function EstudiantesPage() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="8" className="estudiantes-sin-resultados">
-                      No se encontraron estudiantes.
+                    <td colSpan="7" className="facultades-empty">
+                      No se encontraron facultades.
                     </td>
                   </tr>
                 )}
@@ -344,40 +329,38 @@ export default function EstudiantesPage() {
       <Modal
         isOpen={modalAbierto === "crear"}
         onClose={cerrarModal}
-        titulo="Nuevo Estudiante"
+        titulo="Nueva Facultad"
       >
-        <FormularioEstudiante
+        <FormularioFacultad
           formData={formData}
           onChange={manejarCambio}
           onSubmit={manejarCrear}
           onCancelar={cerrarModal}
           textoBoton="Guardar"
-          carreras={carrerasDisponibles}
         />
       </Modal>
 
       <Modal
         isOpen={modalAbierto === "editar"}
         onClose={cerrarModal}
-        titulo="Editar Estudiante"
+        titulo="Editar Facultad"
       >
-        <FormularioEstudiante
+        <FormularioFacultad
           formData={formData}
           onChange={manejarCambio}
           onSubmit={manejarEditar}
           onCancelar={cerrarModal}
           textoBoton="Guardar Cambios"
-          carreras={carrerasDisponibles}
         />
       </Modal>
 
       <Modal
         isOpen={modalAbierto === "eliminar"}
         onClose={cerrarModal}
-        titulo="Eliminar Estudiante"
+        titulo="Eliminar Facultad"
       >
-        <EliminarEstudiante
-          estudiante={seleccionado}
+        <EliminarFacultad
+          facultad={seleccionado}
           onConfirmar={manejarEliminar}
           onCancelar={cerrarModal}
         />

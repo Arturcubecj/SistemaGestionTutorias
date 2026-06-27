@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Sidebar from "../../../components/Sidebar";
-import Header from "../../../components/Header";
-import Modal from "../../../components/Modal";
-import FormularioDocente from "../../../components/administrador/academica/docentes/FormularioDocente";
-import EliminarDocente from "../../../components/administrador/academica/docentes/EliminarDocente";
+import Sidebar from "../Sidebar";
+import Header from "../Header";
+import Modal from "../Modal";
+import FormularioPeriodo from "../administrador/academica/periodos/FormularioPeriodo";
+import EliminarPeriodo from "../administrador/academica/periodos/EliminarPeriodo";
 
 const menuCoordinadorEstructurado = [
     {
@@ -88,106 +88,85 @@ const menuCoordinadorEstructurado = [
     },
   ];
 
-const docentesIniciales = [
+const periodosIniciales = [
   {
     id: 1,
-    nombre: "Carlos Martínez",
-    titulo: "Ing.",
-    email: "c.martinez@ug.edu.ec",
-    facultad: "Facultad de Ciencias Matemáticas y Físicas",
-    especialidad: "Desarrollo de Software",
-    estado: "Activo",
+    nombre: "Periodo 2025-2026 CI",
+    codigo: "2025-CI",
+    fechaInicio: "2025-05-01",
+    fechaFin: "2025-09-30",
+    estado: "Cerrado",
   },
   {
     id: 2,
-    nombre: "Laura Cedeño",
-    titulo: "Dra.",
-    email: "l.cedeno@ug.edu.ec",
-    facultad: "Facultad de Ciencias Matemáticas y Físicas",
-    especialidad: "Bases de Datos",
-    estado: "Activo",
+    nombre: "Periodo 2025-2026 CII",
+    codigo: "2025-CII",
+    fechaInicio: "2025-10-01",
+    fechaFin: "2026-03-31",
+    estado: "Cerrado",
   },
   {
     id: 3,
-    nombre: "Juan Mora",
-    titulo: "Mg.",
-    email: "j.mora@ug.edu.ec",
-    facultad: "Facultad de Filosofía, Letras y Ciencias de la Educación",
-    especialidad: "Pedagogía",
+    nombre: "Periodo 2026-2027 CI",
+    codigo: "2026-CI",
+    fechaInicio: "2026-05-01",
+    fechaFin: "2026-09-30",
     estado: "Activo",
   },
   {
     id: 4,
-    nombre: "Roberto Alvarado",
-    titulo: "Dr.",
-    email: "r.alvarado@ug.edu.ec",
-    facultad: "Facultad de Ciencias Matemáticas y Físicas",
-    especialidad: "Matemáticas",
-    estado: "Inactivo",
-  },
-  {
-    id: 5,
-    nombre: "Sofía Reyes",
-    titulo: "Ing.",
-    email: "s.reyes@ug.edu.ec",
-    facultad: "Facultad de Ingeniería Industrial",
-    especialidad: "Procesos Industriales",
-    estado: "Activo",
+    nombre: "Periodo 2026-2027 CII",
+    codigo: "2026-CII",
+    fechaInicio: "2026-10-01",
+    fechaFin: "2027-03-31",
+    estado: "Planificado",
   },
 ];
-
-const facultadesDisponibles = [
-  "Facultad de Ciencias Matemáticas y Físicas",
-  "Facultad de Ciencias Naturales",
-  "Facultad de Filosofía, Letras y Ciencias de la Educación",
-  "Facultad de Ciencias Médicas",
-  "Facultad de Ingeniería Industrial",
-];
-
-const titulosDisponibles = ["Ing.", "Lic.", "Mg.", "Dr.", "Dra.", "PhD."];
 
 const formVacio = {
   nombre: "",
-  titulo: "Ing.",
-  email: "",
-  facultad: "",
-  especialidad: "",
-  estado: "Activo",
+  codigo: "",
+  fechaInicio: "",
+  fechaFin: "",
+  estado: "Planificado",
 };
 
-export default function DocentesPage() {
-  const [docentes, setDocentes] = useState(docentesIniciales);
+const colorEstado = {
+  Activo: { bg: "#dcfce7", color: "#16a34a" },
+  Planificado: { bg: "#dbeafe", color: "#1d4ed8" },
+  Cerrado: { bg: "#f1f5f9", color: "#475569" },
+};
+
+export default function PeriodosPage() {
+  const [periodos, setPeriodos] = useState(periodosIniciales);
   const [busqueda, setBusqueda] = useState("");
   const [modalAbierto, setModalAbierto] = useState(null);
   const [seleccionado, setSeleccionado] = useState(null);
   const [formData, setFormData] = useState(formVacio);
 
-  const docentesFiltrados = docentes.filter(
-    (d) =>
-      d.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
-      d.email.toLowerCase().includes(busqueda.toLowerCase()) ||
-      d.especialidad.toLowerCase().includes(busqueda.toLowerCase()) ||
-      d.facultad.toLowerCase().includes(busqueda.toLowerCase()),
+  const periodosFiltrados = periodos.filter(
+    (p) =>
+      p.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+      p.codigo.toLowerCase().includes(busqueda.toLowerCase()),
   );
 
   const abrirCrear = () => {
     setFormData(formVacio);
     setModalAbierto("crear");
   };
-  const abrirEditar = (d) => {
-    setSeleccionado(d);
+  const abrirEditar = (p) => {
+    setSeleccionado(p);
     setFormData({
-      nombre: d.nombre,
-      titulo: d.titulo,
-      email: d.email,
-      facultad: d.facultad,
-      especialidad: d.especialidad,
-      estado: d.estado,
+      nombre: p.nombre,
+      codigo: p.codigo,
+      fechaInicio: p.fechaInicio,
+      fechaFin: p.fechaFin,
+      estado: p.estado,
     });
     setModalAbierto("editar");
   };
-  const abrirEliminar = (d) => {
-    setSeleccionado(d);
+  const abrirEliminar = (p) => {
+    setSeleccionado(p);
     setModalAbierto("eliminar");
   };
   const cerrarModal = () => {
@@ -203,20 +182,20 @@ export default function DocentesPage() {
 
   const manejarCrear = (e) => {
     e.preventDefault();
-    setDocentes((prev) => [...prev, { id: Date.now(), ...formData }]);
+    setPeriodos((prev) => [...prev, { id: Date.now(), ...formData }]);
     cerrarModal();
   };
 
   const manejarEditar = (e) => {
     e.preventDefault();
-    setDocentes((prev) =>
-      prev.map((d) => (d.id === seleccionado.id ? { ...d, ...formData } : d)),
+    setPeriodos((prev) =>
+      prev.map((p) => (p.id === seleccionado.id ? { ...p, ...formData } : p)),
     );
     cerrarModal();
   };
 
   const manejarEliminar = () => {
-    setDocentes((prev) => prev.filter((d) => d.id !== seleccionado.id));
+    setPeriodos((prev) => prev.filter((p) => p.id !== seleccionado.id));
     cerrarModal();
   };
 
@@ -228,50 +207,50 @@ export default function DocentesPage() {
         <Header />
         <main className="main-content-body">
           {/* Encabezado */}
-          <div className="docentes-header">
+          <div className="periodos-header">
             <div>
-              <h2 className="docentes-title">Docentes</h2>
-              <p className="docentes-subtitle">
-                Gestión de docentes registrados en el sistema.
+              <h2 className="periodos-title">Periodos Académicos</h2>
+              <p className="periodos-subtitle">
+                Gestión de periodos académicos registrados en el sistema.
               </p>
             </div>
 
-            <button onClick={abrirCrear} className="btn-nuevo-docente">
+            <button onClick={abrirCrear} className="btn-nuevo-periodo">
               <i className="bi bi-plus-lg"></i>
-              Nuevo Docente
+              Nuevo Periodo
             </button>
           </div>
 
           {/* Buscador */}
-          <div className="docentes-search-container">
-            <div className="docentes-search-box">
+          <div className="periodos-search-container">
+            <div className="periodos-search-box">
               <i className="bi bi-search"></i>
 
               <input
                 type="text"
-                placeholder="Buscar docente..."
+                placeholder="Buscar periodo..."
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
-                className="docentes-search-input"
+                className="periodos-search-input"
               />
             </div>
           </div>
 
           {/* Tabla */}
-          <div className="docentes-table-container">
-            <table className="docentes-table">
+          <div className="periodos-table-container">
+            <table className="periodos-table">
               <thead>
-                <tr className="docentes-table-head-row">
+                <tr className="periodos-table-header-row">
                   {[
                     "#",
                     "Nombre",
-                    "Correo",
-                    "Facultad",
-                    "Especialidad",
+                    "Código",
+                    "Fecha Inicio",
+                    "Fecha Fin",
                     "Estado",
                     "Acciones",
                   ].map((h) => (
-                    <th key={h} className="docentes-table-head">
+                    <th key={h} className="periodos-table-header">
                       {h}
                     </th>
                   ))}
@@ -279,39 +258,31 @@ export default function DocentesPage() {
               </thead>
 
               <tbody>
-                {docentesFiltrados.length > 0 ? (
-                  docentesFiltrados.map((d, i) => (
-                    <tr key={d.id} className="docentes-table-row">
-                      <td className="docentes-table-cell">{i + 1}</td>
+                {periodosFiltrados.length > 0 ? (
+                  periodosFiltrados.map((p, i) => (
+                    <tr key={p.id} className="periodos-table-row">
+                      <td className="periodos-table-cell">{i + 1}</td>
+                      <td className="periodos-table-cell">{p.nombre}</td>
+                      <td className="periodos-table-cell">{p.codigo}</td>
+                      <td className="periodos-table-cell">{p.fechaInicio}</td>
+                      <td className="periodos-table-cell">{p.fechaFin}</td>
 
-                      <td className="docentes-table-cell">
-                        <div className="docente-nombre">
-                          {d.titulo} {d.nombre}
-                        </div>
-                      </td>
-
-                      <td className="docentes-table-email">{d.email}</td>
-
-                      <td className="docentes-table-cell">{d.facultad}</td>
-
-                      <td className="docentes-table-cell">{d.especialidad}</td>
-
-                      <td className="docentes-table-cell">
+                      <td className="periodos-table-cell">
                         <span
-                          className={`estado-badge ${
-                            d.estado === "Activo"
-                              ? "estado-activo"
-                              : "estado-inactivo"
-                          }`}
+                          className="estado-badge"
+                          style={{
+                            background: colorEstado[p.estado]?.bg,
+                            color: colorEstado[p.estado]?.color,
+                          }}
                         >
-                          {d.estado}
+                          {p.estado}
                         </span>
                       </td>
 
-                      <td className="docentes-table-cell">
+                      <td className="periodos-table-cell">
                         <div className="acciones-container">
                           <button
-                            onClick={() => abrirEditar(d)}
+                            onClick={() => abrirEditar(p)}
                             title="Editar"
                             className="btn-accion btn-editar"
                           >
@@ -319,7 +290,7 @@ export default function DocentesPage() {
                           </button>
 
                           <button
-                            onClick={() => abrirEliminar(d)}
+                            onClick={() => abrirEliminar(p)}
                             title="Eliminar"
                             className="btn-accion btn-eliminar"
                           >
@@ -331,8 +302,8 @@ export default function DocentesPage() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="7" className="sin-resultados">
-                      No se encontraron docentes.
+                    <td colSpan="7" className="sin-registros">
+                      No se encontraron periodos.
                     </td>
                   </tr>
                 )}
@@ -345,42 +316,38 @@ export default function DocentesPage() {
       <Modal
         isOpen={modalAbierto === "crear"}
         onClose={cerrarModal}
-        titulo="Nuevo Docente"
+        titulo="Nuevo Periodo Académico"
       >
-        <FormularioDocente
+        <FormularioPeriodo
           formData={formData}
           onChange={manejarCambio}
           onSubmit={manejarCrear}
           onCancelar={cerrarModal}
           textoBoton="Guardar"
-          facultades={facultadesDisponibles}
-          titulos={titulosDisponibles}
         />
       </Modal>
 
       <Modal
         isOpen={modalAbierto === "editar"}
         onClose={cerrarModal}
-        titulo="Editar Docente"
+        titulo="Editar Periodo Académico"
       >
-        <FormularioDocente
+        <FormularioPeriodo
           formData={formData}
           onChange={manejarCambio}
           onSubmit={manejarEditar}
           onCancelar={cerrarModal}
           textoBoton="Guardar Cambios"
-          facultades={facultadesDisponibles}
-          titulos={titulosDisponibles}
         />
       </Modal>
 
       <Modal
         isOpen={modalAbierto === "eliminar"}
         onClose={cerrarModal}
-        titulo="Eliminar Docente"
+        titulo="Eliminar Periodo Académico"
       >
-        <EliminarDocente
-          docente={seleccionado}
+        <EliminarPeriodo
+          periodo={seleccionado}
           onConfirmar={manejarEliminar}
           onCancelar={cerrarModal}
         />

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Sidebar from "../../../components/Sidebar";
-import Header from "../../../components/Header";
-import Modal from "../../../components/Modal";
-import FormularioFacultad from "../../../components/administrador/academica/facultades/FormularioFacultad";
-import EliminarFacultad from "../../../components/administrador/academica/facultades/EliminarFacultad";
+import Sidebar from "../Sidebar";
+import Header from "../Header";
+import Modal from "../Modal";
+import FormularioCarrera from "./academica/carreras/FormularioCarrera";
+import EliminarCarrera from "./academica/carreras/EliminarCarrera";
 
 const menuAdminEstructurado = [
   {
@@ -88,81 +88,96 @@ const menuAdminEstructurado = [
   },
 ];
 
-const facultadesIniciales = [
+const carrerasIniciales = [
   {
     id: 1,
-    nombre: "Facultad de Ciencias Matemáticas y Físicas",
-    codigo: "FCMF",
-    decano: "Dr. Roberto Alvarado",
-    carreras: 5,
+    nombre: "Ingeniería en Software",
+    codigo: "ISW",
+    facultad: "Facultad de Ciencias Matemáticas y Físicas",
+    duracion: 5,
     estado: "Activo",
   },
   {
     id: 2,
-    nombre: "Facultad de Ciencias Naturales",
-    codigo: "FCN",
-    decano: "Dra. Patricia Salinas",
-    carreras: 3,
+    nombre: "Ingeniería en Sistemas",
+    codigo: "ISI",
+    facultad: "Facultad de Ciencias Matemáticas y Físicas",
+    duracion: 5,
     estado: "Activo",
   },
   {
     id: 3,
-    nombre: "Facultad de Filosofía, Letras y Ciencias de la Educación",
-    codigo: "FFLCE",
-    decano: "Mg. Juan Mora",
-    carreras: 8,
+    nombre: "Ingeniería Industrial",
+    codigo: "IIN",
+    facultad: "Facultad de Ingeniería Industrial",
+    duracion: 5,
     estado: "Activo",
   },
   {
     id: 4,
-    nombre: "Facultad de Ciencias Médicas",
-    codigo: "FCM",
-    decano: "Dr. Carlos Vega",
-    carreras: 4,
-    estado: "Inactivo",
+    nombre: "Medicina",
+    codigo: "MED",
+    facultad: "Facultad de Ciencias Médicas",
+    duracion: 6,
+    estado: "Activo",
   },
   {
     id: 5,
-    nombre: "Facultad de Ingeniería Industrial",
-    codigo: "FII",
-    decano: "Ing. Sofía Reyes",
-    carreras: 6,
-    estado: "Activo",
+    nombre: "Biología",
+    codigo: "BIO",
+    facultad: "Facultad de Ciencias Naturales",
+    duracion: 4,
+    estado: "Inactivo",
   },
 ];
 
-const formVacio = { nombre: "", codigo: "", decano: "", estado: "Activo" };
+const facultadesDisponibles = [
+  "Facultad de Ciencias Matemáticas y Físicas",
+  "Facultad de Ciencias Naturales",
+  "Facultad de Filosofía, Letras y Ciencias de la Educación",
+  "Facultad de Ciencias Médicas",
+  "Facultad de Ingeniería Industrial",
+];
 
-export default function FacultadesPage() {
-  const [facultades, setFacultades] = useState(facultadesIniciales);
+const formVacio = {
+  nombre: "",
+  codigo: "",
+  facultad: "",
+  duracion: "",
+  estado: "Activo",
+};
+
+export default function CarrerasPage() {
+  const [carreras, setCarreras] = useState(carrerasIniciales);
   const [busqueda, setBusqueda] = useState("");
   const [modalAbierto, setModalAbierto] = useState(null);
   const [seleccionado, setSeleccionado] = useState(null);
   const [formData, setFormData] = useState(formVacio);
 
-  const facultadesFiltradas = facultades.filter(
-    (f) =>
-      f.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
-      f.codigo.toLowerCase().includes(busqueda.toLowerCase()) ||
-      f.decano.toLowerCase().includes(busqueda.toLowerCase()),
+  const carrerasFiltradas = carreras.filter(
+    (c) =>
+      c.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+      c.codigo.toLowerCase().includes(busqueda.toLowerCase()) ||
+      c.facultad.toLowerCase().includes(busqueda.toLowerCase()),
   );
 
   const abrirCrear = () => {
     setFormData(formVacio);
     setModalAbierto("crear");
   };
-  const abrirEditar = (f) => {
-    setSeleccionado(f);
+  const abrirEditar = (c) => {
+    setSeleccionado(c);
     setFormData({
-      nombre: f.nombre,
-      codigo: f.codigo,
-      decano: f.decano,
-      estado: f.estado,
+      nombre: c.nombre,
+      codigo: c.codigo,
+      facultad: c.facultad,
+      duracion: c.duracion,
+      estado: c.estado,
     });
     setModalAbierto("editar");
   };
-  const abrirEliminar = (f) => {
-    setSeleccionado(f);
+  const abrirEliminar = (c) => {
+    setSeleccionado(c);
     setModalAbierto("eliminar");
   };
   const cerrarModal = () => {
@@ -178,23 +193,20 @@ export default function FacultadesPage() {
 
   const manejarCrear = (e) => {
     e.preventDefault();
-    setFacultades((prev) => [
-      ...prev,
-      { id: Date.now(), ...formData, carreras: 0 },
-    ]);
+    setCarreras((prev) => [...prev, { id: Date.now(), ...formData }]);
     cerrarModal();
   };
 
   const manejarEditar = (e) => {
     e.preventDefault();
-    setFacultades((prev) =>
-      prev.map((f) => (f.id === seleccionado.id ? { ...f, ...formData } : f)),
+    setCarreras((prev) =>
+      prev.map((c) => (c.id === seleccionado.id ? { ...c, ...formData } : c)),
     );
     cerrarModal();
   };
 
   const manejarEliminar = () => {
-    setFacultades((prev) => prev.filter((f) => f.id !== seleccionado.id));
+    setCarreras((prev) => prev.filter((c) => c.id !== seleccionado.id));
     cerrarModal();
   };
 
@@ -206,106 +218,92 @@ export default function FacultadesPage() {
         <Header />
         <main className="main-content-body">
           {/* Encabezado */}
-          <div className="facultades-header">
+          <div className="carreras-header">
             <div>
-              <h2 className="facultades-title">Facultades</h2>
-              <p className="facultades-subtitle">
-                Gestión de facultades registradas en el sistema.
+              <h2 className="carreras-title">Carreras</h2>
+              <p className="carreras-subtitle">
+                Gestión de carreras registradas en el sistema.
               </p>
             </div>
-            <button onClick={abrirCrear} className="btn-nueva-facultad">
-              <i className="bi bi-plus-lg"></i> Nueva Facultad
+
+            <button onClick={abrirCrear} className="btn-nueva-carrera">
+              <i className="bi bi-plus-lg"></i>
+              Nueva Carrera
             </button>
           </div>
 
           {/* Buscador */}
-          <div className="facultades-search-container">
-            <div className="facultades-search-box">
+          <div className="carreras-search-container">
+            <div className="carreras-search-box">
               <i className="bi bi-search"></i>
+
               <input
                 type="text"
-                className="facultades-search-input"
-                placeholder="Buscar facultad..."
+                placeholder="Buscar carrera..."
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
+                className="carreras-search-input"
               />
             </div>
           </div>
 
           {/* Tabla */}
-          <div className="facultades-table-wrapper">
-            <table className="facultades-table">
+          <div className="carreras-table-container">
+            <table className="carreras-table">
               <thead>
-                <tr style={{ background: "#f1f5f9" }}>
+                <tr className="carreras-table-header-row">
                   {[
                     "#",
                     "Nombre",
                     "Código",
-                    "Decano",
-                    "Carreras",
+                    "Facultad",
+                    "Duración (años)",
                     "Estado",
                     "Acciones",
                   ].map((h) => (
-                    <th
-                      key={h}
-                      style={{
-                        padding: "12px 16px",
-                        textAlign: "left",
-                        fontWeight: 600,
-                        color: "#475569",
-                        fontSize: "0.82rem",
-                        textTransform: "uppercase",
-                        letterSpacing: "0.5px",
-                      }}
-                    >
+                    <th key={h} className="carreras-table-header">
                       {h}
                     </th>
                   ))}
                 </tr>
               </thead>
+
               <tbody>
-                {facultadesFiltradas.length > 0 ? (
-                  facultadesFiltradas.map((f, i) => (
-                    <tr key={f.id} style={{ borderTop: "1px solid #f1f5f9" }}>
-                      <td style={{ padding: "14px 16px", color: "#334155" }}>
-                        {i + 1}
-                      </td>
-                      <td style={{ padding: "14px 16px", color: "#334155" }}>
-                        {f.nombre}
-                      </td>
-                      <td style={{ padding: "14px 16px", color: "#334155" }}>
-                        {f.codigo}
-                      </td>
-                      <td style={{ padding: "14px 16px", color: "#334155" }}>
-                        {f.decano}
-                      </td>
-                      <td style={{ padding: "14px 16px", color: "#334155" }}>
-                        {f.carreras}
-                      </td>
-                      <td style={{ padding: "14px 16px" }}>
+                {carrerasFiltradas.length > 0 ? (
+                  carrerasFiltradas.map((c, i) => (
+                    <tr key={c.id} className="carreras-table-row">
+                      <td className="carreras-table-cell">{i + 1}</td>
+                      <td className="carreras-table-cell">{c.nombre}</td>
+                      <td className="carreras-table-cell">{c.codigo}</td>
+                      <td className="carreras-table-cell">{c.facultad}</td>
+                      <td className="carreras-table-cell">{c.duracion}</td>
+
+                      <td className="carreras-table-cell">
                         <span
                           className={`estado-badge ${
-                            f.estado === "Activo"
+                            c.estado === "Activo"
                               ? "estado-activo"
                               : "estado-inactivo"
                           }`}
                         >
-                          {f.estado}
+                          {c.estado}
                         </span>
                       </td>
-                      <td style={{ padding: "14px 16px" }}>
+
+                      <td className="carreras-table-cell">
                         <div className="acciones-container">
                           <button
-                            onClick={() => abrirEditar(f)}
+                            onClick={() => abrirEditar(c)}
                             title="Editar"
-                            className="btn-icon btn-editar"
+                            className="btn-accion btn-editar"
                           >
                             <i className="bi bi-pencil"></i>
                           </button>
+
                           <button
-                            onClick={() => abrirEliminar(f)}
+                            onClick={() => abrirEliminar(c)}
                             title="Eliminar"
-                            className="btn-icon btn-eliminar"
+                            className="btn-accion btn-eliminar"
                           >
                             <i className="bi bi-trash"></i>
                           </button>
@@ -315,8 +313,8 @@ export default function FacultadesPage() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="7" className="facultades-empty">
-                      No se encontraron facultades.
+                    <td colSpan="7" className="sin-registros">
+                      No se encontraron carreras.
                     </td>
                   </tr>
                 )}
@@ -329,38 +327,40 @@ export default function FacultadesPage() {
       <Modal
         isOpen={modalAbierto === "crear"}
         onClose={cerrarModal}
-        titulo="Nueva Facultad"
+        titulo="Nueva Carrera"
       >
-        <FormularioFacultad
+        <FormularioCarrera
           formData={formData}
           onChange={manejarCambio}
           onSubmit={manejarCrear}
           onCancelar={cerrarModal}
           textoBoton="Guardar"
+          facultades={facultadesDisponibles}
         />
       </Modal>
 
       <Modal
         isOpen={modalAbierto === "editar"}
         onClose={cerrarModal}
-        titulo="Editar Facultad"
+        titulo="Editar Carrera"
       >
-        <FormularioFacultad
+        <FormularioCarrera
           formData={formData}
           onChange={manejarCambio}
           onSubmit={manejarEditar}
           onCancelar={cerrarModal}
           textoBoton="Guardar Cambios"
+          facultades={facultadesDisponibles}
         />
       </Modal>
 
       <Modal
         isOpen={modalAbierto === "eliminar"}
         onClose={cerrarModal}
-        titulo="Eliminar Facultad"
+        titulo="Eliminar Carrera"
       >
-        <EliminarFacultad
-          facultad={seleccionado}
+        <EliminarCarrera
+          carrera={seleccionado}
           onConfirmar={manejarEliminar}
           onCancelar={cerrarModal}
         />
