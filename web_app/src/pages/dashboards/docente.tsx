@@ -98,76 +98,25 @@ export default function CoordinadorDashboard() {
     if (savedRole) setRol(savedRole);
   }, []);
 
+export default function Admin() {
+  const router = useRouter();
+
+  const cerrarSesion = (): void => {
+    localStorage.clear();
+    router.replace('/login');
+  };
+
   return (
     <div className="dashboard-layout">
-      <Sidebar titulo="Menu" menuEstructurado={menuCoordinadorEstructurado} />
-
-      <div className="dashboard-viewport">
-        <Header />
-        <main className="main-content-body">
-          <h2>Hola, bienvenido {rol}</h2>
-          <p className="dashboard-subtitle">
-            Panel de control para la coordinación del sistema de tutorías.
-          </p>
-
-          <div className="dashboard-grid">
-            <section className="dashboard-card-panel">
-              <h3>Resumen del sistema</h3>
-              <div className="empty-state">
-                No hay datos disponibles en este momento.
-              </div>
-            </section>
-
-            <aside className="dashboard-card-panel">
-              <h3>Acciones rápidas</h3>
-              <div className="quick-actions-list">
-                <button
-                  className="btn-quick-action primary"
-                  onClick={() => setModalAbierto("reportes")}
-                >
-                  Ver reportes de tutorías
-                </button>
-                <button
-                  className="btn-quick-action"
-                  onClick={() => setModalAbierto("usuarios")}
-                >
-                  Gestionar usuarios
-                </button>
-                <button
-                  className="btn-quick-action"
-                  onClick={() => setModalAbierto("metricas")}
-                >
-                  Métricas del Agente IA
-                </button>
-              </div>
-            </aside>
-          </div>
-        </main>
-      </div>
-
-      <Modal
-        isOpen={modalAbierto === "reportes"}
-        onClose={() => setModalAbierto(null)}
-        titulo="Reporte de Tutorías"
-      >
-        <ReporteTutorias onCancelar={() => setModalAbierto(null)} />
-      </Modal>
-
-      <Modal
-        isOpen={modalAbierto === "usuarios"}
-        onClose={() => setModalAbierto(null)}
-        titulo="Gestión de Usuarios"
-      >
-        <GestionUsuarios onCancelar={() => setModalAbierto(null)} />
-      </Modal>
-
-      <Modal
-        isOpen={modalAbierto === "metricas"}
-        onClose={() => setModalAbierto(null)}
-        titulo="Métricas del Agente IA"
-      >
-        <MetricasIA onCancelar={() => setModalAbierto(null)} />
-      </Modal>
+      <aside className="sidebar-simple">
+        <h3>DOCENTE</h3>
+        <button className="btn-salir" onClick={cerrarSesion}>
+          Cerrar Sesión
+        </button>
+      </aside>
+      <main className="main-simple">
+        <h1>Panel de DOCENTE</h1>
+      </main>
     </div>
   );
 }

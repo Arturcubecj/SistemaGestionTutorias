@@ -1,10 +1,27 @@
-// src/components/Sidebar.jsx
+'use client';
 import { useState } from 'react'; 
 import { useRouter } from 'next/router';
 
-export default function Sidebar({ titulo = "", menuEstructurado = [] }) {
+export interface MenuItem {
+  nombre: string;
+  ruta: string;
+  icono: string;
+  accion?: () => void;
+}
+
+export interface SeccionMenu {
+  categoria: string;
+  items: MenuItem[];
+}
+
+interface SidebarProps {
+  titulo?: string;
+  menuEstructurado: SeccionMenu[];
+}
+
+export default function Sidebar({ titulo = "", menuEstructurado = [] }: SidebarProps) {
   const router = useRouter();
-  const [colapsado, setColapsado] = useState(true);
+  const [colapsado, setColapsado] = useState<boolean>(true);
 
   return (
     <aside className={`sidebar-container ${colapsado ? 'collapsed' : ''}`}>
@@ -24,16 +41,16 @@ export default function Sidebar({ titulo = "", menuEstructurado = [] }) {
         </div>
         
         <div className="sidebar-menu-wrapper">
-          {menuEstructurado.map((seccion, sIdx) => (
+          {menuEstructurado.map((seccion: SeccionMenu, sIdx: number) => (
             <div key={sIdx}>
 
-              {/* Categoría: Solo visible si está expandido */}
+              {/* Categoría */}
               {seccion.categoria && !colapsado && (
                 <div className="sidebar-section-title">{seccion.categoria}</div>
               )}
               
               <ul className="sidebar-menu">
-                {seccion.items.map((item, iIdx) => {
+                {seccion.items.map((item: MenuItem, iIdx: number) => {
                   const estaActiva = router.pathname === item.ruta;
                   
                   const manejarClic = () => {

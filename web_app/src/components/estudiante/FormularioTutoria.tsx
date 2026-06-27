@@ -1,28 +1,40 @@
-import { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 
-export default function FormularioSolicitud({ onCancelar, onExito }) {
-  const [formData, setFormData] = useState({
+interface FormData {
+  asignatura: string;
+  fecha: string;
+  hora: string;
+  motivo: string;
+}
+
+interface FormProps {
+  onCancelar: () => void;
+  onExito: (datos: FormData) => void;
+}
+
+export default function FormularioSolicitud({ onCancelar, onExito }: FormProps) {
+  const [formData, setFormData] = useState<FormData>({
     asignatura: '',
-    docente: '',
-    tipo: 'Individual',
+    fecha: '',
+    hora: '',
     motivo: ''
   });
 
-  const manejarCambio = (e) => {
+  const manejarCambio = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const manejarEnvio = (e) => {
+  const manejarEnvio = (e: FormEvent) => {
     e.preventDefault();
-
-    console.log("Datos enviados:", formData);
-    
-    if (onExito) onExito();
+    if (onExito) {
+      onExito(formData);
+    }
   };
 
   return (
     <form className="form-tutoria" onSubmit={manejarEnvio}>
+      
       <div className="form-group">
         <label htmlFor="asignatura">Asignatura</label>
         <select 
@@ -34,40 +46,36 @@ export default function FormularioSolicitud({ onCancelar, onExito }) {
           required
         >
           <option value="">Selecciona la materia</option>
-          <option value="software-quality">Aseguramiento de la Calidad de Software</option>
-          <option value="web-dev">Desarrollo Web Full Stack</option>
-          <option value="databases">Bases de Datos Relacionales</option>
+          <option>Aseguramiento de la Calidad de Software</option>
+          <option>Desarrollo Web Full Stack</option>
+          <option>Bases de Datos Relacionales</option>
         </select>
       </div>
 
       <div className="form-group">
-        <label htmlFor="docente">Docente</label>
-        <select 
-          id="docente" 
-          name="docente" 
+        <label htmlFor="fecha">Fecha sugerida</label>
+        <input 
+          type="date"
+          id="fecha" 
+          name="fecha" 
           className="form-control"
-          value={formData.docente}
+          value={formData.fecha}
           onChange={manejarCambio}
           required
-        >
-          <option value="">Selecciona el docente</option>
-          <option value="docente-1">Ing. Carlos Martínez</option>
-          <option value="docente-2">Dra. Laura Cedeño</option>
-        </select>
+        />
       </div>
 
       <div className="form-group">
-        <label htmlFor="tipo">Tipo de Tutoría</label>
-        <select 
-          id="tipo" 
-          name="tipo" 
+        <label htmlFor="hora">Hora sugerida</label>
+        <input 
+          type="time"
+          id="hora" 
+          name="hora" 
           className="form-control"
-          value={formData.tipo}
+          value={formData.hora}
           onChange={manejarCambio}
-        >
-          <option value="Individual">Individual</option>
-          <option value="Grupal">Grupal</option>
-        </select>
+          required
+        />
       </div>
 
       <div className="form-group">

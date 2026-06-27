@@ -1,0 +1,105 @@
+.reportes-container {
+  padding: 20px 0;
+}
+
+.reportes-header {
+  margin-bottom: 25px;
+}
+
+.reportes-header h2 {
+  font-size: 1.6rem;
+  color: #1a1740;
+  margin: 0 0 5px 0;
+  font-weight: 700;
+}
+
+.reportes-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.metric-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid #e2e8f0; 
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.metric-card:hover {
+  border-color: #cbd5e1;
+}
+
+.metric-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.metric-info h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.metric-info p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Colores de iconos */
+.metric-icon.totales { 
+  background-color: #eff6ff; color: #2563eb; 
+}
+
+.metric-icon.horas { 
+  background-color: #faf5ff; color: #9333ea; 
+}
+
+.metric-icon.aprobadas { 
+  background-color: #ecfdf5; color: #059669; 
+}
+
+.metric-icon.pendientes { 
+  background-color: #fef9c3; color: #a16207; 
+}
+
+.metric-icon.rechazadas { 
+  background-color: #fee2e2; color: #b91c1c; 
+}
+
+
+
+/* Bordes laterales */
+.metric-card:has(.metric-icon.totales) {
+   border-left: 4px solid #2563eb; 
+  }
+
+.metric-card:has(.metric-icon.horas) { 
+  border-left: 4px solid #9333ea; 
+}
+
+.metric-card:has(.metric-icon.aprobadas) { 
+  border-left: 4px solid #059669; 
+}
+
+.metric-card:has(.metric-icon.pendientes) 
+{ border-left: 4px solid #a16207; 
+}
+
+.metric-card:has(.metric-icon.rechazadas) 
+{ border-left: 4px solid #b91c1c; 
+}
