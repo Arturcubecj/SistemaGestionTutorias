@@ -5,10 +5,23 @@ import Modal from "../../components/Modal";
 import ReporteTutorias from "../../components/administrador/inicio/ReporteTutorias";
 import GestionUsuarios from "../../components/administrador/inicio/GestionUsuarios";
 import MetricasIA from "../../components/administrador/inicio/MetricasIA";
+//Componentes de cada página
+import Facultades from "../../components/administrador/Facultades";
+import Carreras from "../../components/administrador/Carreras";
+import Asignaturas from "../../components/administrador/Asignaturas";
+import Periodos from "../../components/administrador/periodos";
+import Docentes from "../../components/administrador/docentes";
+import Estudiantes from "../../components/administrador/Estudiantes";
+import SupervisarTutorias from "../../components/administrador/Tutorias";
+import Reportes from "../../components/administrador/Reportes";
+import MetricasUsoIA from "../../components/administrador/Metricas";
+import PreguntasFrecuentes from "../../components/administrador/Faq";
+import BaseConocimiento from "../../components/administrador/Conocimiento";
 
 export default function AdminDashboard() {
   const [rol, setRol] = useState("");
-  const [modalAbierto, setModalAbierto] = useState(null); // 'reportes' | 'usuarios' | 'metricas'
+  const [modalAbierto, setModalAbierto] = useState(null);
+  const [vistaActual, setVistaActual] = useState("inicio");
 
   const menuAdminEstructurado = [
     {
@@ -16,8 +29,9 @@ export default function AdminDashboard() {
       items: [
         {
           nombre: "Inicio",
-          ruta: "/dashboards/administrador",
+          ruta: "#",
           icono: "bi-house-door",
+          accion: () => setVistaActual("inicio"),
         },
       ],
     },
@@ -26,56 +40,56 @@ export default function AdminDashboard() {
       items: [
         {
           nombre: "Facultades",
-          ruta: "/dashboards/administrador/facultades",
+          ruta: "#",
           icono: "bi-building",
+          accion: () => setVistaActual("facultades"),
         },
         {
           nombre: "Carreras",
-          ruta: "/dashboards/administrador/carreras",
+          ruta: "#",
           icono: "bi-diagram-3",
+          accion: () => setVistaActual("carreras"),
         },
         {
           nombre: "Asignaturas",
-          ruta: "/dashboards/administrador/asignaturas",
+          ruta: "#",
           icono: "bi-book",
+          accion: () => setVistaActual("asignaturas"),
         },
         {
           nombre: "Periodos Académicos",
-          ruta: "/dashboards/administrador/periodos",
+          ruta: "#",
           icono: "bi-calendar3",
+          accion: () => setVistaActual("periodos"),
         },
         {
           nombre: "Docentes",
-          ruta: "/dashboards/administrador/docentes",
+          ruta: "#",
           icono: "bi-person-badge",
+          accion: () => setVistaActual("docentes"),
         },
         {
           nombre: "Estudiantes",
-          ruta: "/dashboards/administrador/estudiantes",
+          ruta: "#",
           icono: "bi-people",
+          accion: () => setVistaActual("estudiantes"),
         },
       ],
     },
-    // {
-    //   categoria: 'SEGURIDAD',
-    //   items: [
-    //     { nombre: 'Usuarios', ruta: '/dashboards/administrador/usuarios', icono: 'bi-person-gear' },
-    //     { nombre: 'Roles y Permisos', ruta: '/dashboards/administrador/roles', icono: 'bi-shield-lock' },
-    //     { nombre: 'Auditoría', ruta: '/dashboards/administrador/auditoria', icono: 'bi-journal-text' },
-    //   ]
-    // },
     {
       categoria: "TUTORÍAS",
       items: [
         {
           nombre: "Supervisar Tutorías",
-          ruta: "/dashboards/administrador/tutorias",
+          ruta: "#",
           icono: "bi-calendar-check",
+          accion: () => setVistaActual("supervisar"),
         },
         {
           nombre: "Reportes",
-          ruta: "/dashboards/administrador/reportes",
+          ruta: "#",
           icono: "bi-file-earmark-bar-graph",
+          accion: () => setVistaActual("reportes"),
         },
       ],
     },
@@ -84,18 +98,21 @@ export default function AdminDashboard() {
       items: [
         {
           nombre: "Métricas de uso IA",
-          ruta: "/dashboards/administrador/metricas",
+          ruta: "#",
           icono: "bi-graph-up",
+          accion: () => setVistaActual("metricas-ia"),
         },
         {
           nombre: "Preguntas Frecuentes",
-          ruta: "/dashboards/administrador/faq",
+          ruta: "#",
           icono: "bi-question-circle",
+          accion: () => setVistaActual("faq"),
         },
         {
           nombre: "Base de Conocimiento",
-          ruta: "/dashboards/administrador/conocimiento",
+          ruta: "#",
           icono: "bi-database",
+          accion: () => setVistaActual("conocimiento"),
         },
       ],
     },
@@ -113,43 +130,59 @@ export default function AdminDashboard() {
       <div className="dashboard-viewport">
         <Header />
         <main className="main-content-body">
-          <h2>Hola, bienvenido {rol}</h2>
-          <p className="dashboard-subtitle">
-            Panel de control para la administración del sistema de tutorías.
-          </p>
 
-          <div className="dashboard-grid">
-            <section className="dashboard-card-panel">
-              <h3>Resumen del sistema</h3>
-              <div className="empty-state">
-                No hay datos disponibles en este momento.
+          {vistaActual === "inicio" && (
+            <>
+              <h2>Hola, bienvenido {rol}</h2>
+              <p className="dashboard-subtitle">
+                Panel de control para la administración del sistema de tutorías.
+              </p>
+              <div className="dashboard-grid">
+                <section className="dashboard-card-panel">
+                  <h3>Resumen del sistema</h3>
+                  <div className="empty-state">
+                    No hay datos disponibles en este momento.
+                  </div>
+                </section>
+                <aside className="dashboard-card-panel">
+                  <h3>Acciones rápidas</h3>
+                  <div className="quick-actions-list">
+                    <button
+                      className="btn-quick-action primary"
+                      onClick={() => setModalAbierto("reportes")}
+                    >
+                      Ver reportes de tutorías
+                    </button>
+                    <button
+                      className="btn-quick-action"
+                      onClick={() => setModalAbierto("usuarios")}
+                    >
+                      Gestionar usuarios
+                    </button>
+                    <button
+                      className="btn-quick-action"
+                      onClick={() => setModalAbierto("metricas")}
+                    >
+                      Métricas del Agente IA
+                    </button>
+                  </div>
+                </aside>
               </div>
-            </section>
+            </>
+          )}
 
-            <aside className="dashboard-card-panel">
-              <h3>Acciones rápidas</h3>
-              <div className="quick-actions-list">
-                <button
-                  className="btn-quick-action primary"
-                  onClick={() => setModalAbierto("reportes")}
-                >
-                  Ver reportes de tutorías
-                </button>
-                <button
-                  className="btn-quick-action"
-                  onClick={() => setModalAbierto("usuarios")}
-                >
-                  Gestionar usuarios
-                </button>
-                <button
-                  className="btn-quick-action"
-                  onClick={() => setModalAbierto("metricas")}
-                >
-                  Métricas del Agente IA
-                </button>
-              </div>
-            </aside>
-          </div>
+          {vistaActual === "facultades" && <Facultades />}
+          {vistaActual === "carreras" && <Carreras />}
+          {vistaActual === "asignaturas" && <Asignaturas />}
+          {vistaActual === "periodos" && <Periodos />}
+          {vistaActual === "docentes" && <Docentes />}
+          {vistaActual === "estudiantes" && <Estudiantes />}
+          {vistaActual === "supervisar" && <SupervisarTutorias />}
+          {vistaActual === "reportes" && <Reportes />}
+          {vistaActual === "metricas-ia" && <MetricasUsoIA />}
+          {vistaActual === "faq" && <PreguntasFrecuentes />}
+          {vistaActual === "conocimiento" && <BaseConocimiento />}
+
         </main>
       </div>
 

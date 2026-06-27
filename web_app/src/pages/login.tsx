@@ -42,7 +42,7 @@ function LoginForm() {
         localStorage.setItem('role', res.rol); 
 
         if (res.rol === 'admin') {
-          router.replace('/dashboards/admin');
+          router.replace('/dashboards/administrador');
         } else if (res.rol === 'coordinador') {
           router.replace('/dashboards/coordinador');
         } else if (res.rol === 'docente') {

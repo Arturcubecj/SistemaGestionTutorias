@@ -1,6 +1,4 @@
 import { useState } from 'react';
-import Sidebar from '../Sidebar';
-import Header from '../Header';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import * as XLSX from 'xlsx';
@@ -158,9 +156,7 @@ export default function ReportesPage() {
  
   return (
     <div className="dashboard-layout">
-      <Sidebar titulo="Menu" menuEstructurado={menuAdminEstructurado} />
       <div className="dashboard-viewport">
-        <Header />
         <main className="main-content-body">
  
           {/* Encabezado */}
@@ -269,7 +265,7 @@ function TablaDocentes({ datos, busqueda }) {
               <td><span className="badge-bold">{d.atendidas + d.confirmadas + d.canceladas + d.noAsistidas}</span></td>
             </tr>
           )) : (
-            <tr className="empty-row"><td colSpan="8">No se encontraron resultados.</td></tr>
+            <tr className="empty-row"><td colSpan={8}>No se encontraron resultados.</td></tr>
           )}
         </tbody>
       </table>
@@ -306,7 +302,7 @@ function TablaEstudiantes({ datos, busqueda }) {
               <td>{d.docente}</td>
             </tr>
           )) : (
-            <tr className="empty-row"><td colSpan="6">No se encontraron resultados.</td></tr>
+            <tr className="empty-row"><td colSpan={6}>No se encontraron resultados.</td></tr>
           )}
         </tbody>
       </table>
@@ -348,7 +344,7 @@ function TablaTemas({ datos, busqueda }) {
               </td>
             </tr>
           )) : (
-            <tr className="empty-row"><td colSpan="5">No se encontraron resultados.</td></tr>
+            <tr className="empty-row"><td colSpan={5}>No se encontraron resultados.</td></tr>
           )}
         </tbody>
       </table>

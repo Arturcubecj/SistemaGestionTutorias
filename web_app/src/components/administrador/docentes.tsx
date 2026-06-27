@@ -1,92 +1,8 @@
 import { useState } from "react";
-import Sidebar from "../Sidebar";
-import Header from "../Header";
 import Modal from "../Modal";
 import FormularioDocente from "./academica/docentes/FormularioDocente";
 import EliminarDocente from "./academica/docentes/EliminarDocente";
 
-const menuAdminEstructurado = [
-  {
-    categoria: "GENERAL",
-    items: [
-      {
-        nombre: "Inicio",
-        ruta: "/dashboards/administrador",
-        icono: "bi-house-door",
-      },
-    ],
-  },
-  {
-    categoria: "ADMINISTRACIÓN ACADÉMICA",
-    items: [
-      {
-        nombre: "Facultades",
-        ruta: "/dashboards/administrador/facultades",
-        icono: "bi-building",
-      },
-      {
-        nombre: "Carreras",
-        ruta: "/dashboards/administrador/carreras",
-        icono: "bi-diagram-3",
-      },
-      {
-        nombre: "Asignaturas",
-        ruta: "/dashboards/administrador/asignaturas",
-        icono: "bi-book",
-      },
-      {
-        nombre: "Periodos Académicos",
-        ruta: "/dashboards/administrador/periodos",
-        icono: "bi-calendar3",
-      },
-      {
-        nombre: "Docentes",
-        ruta: "/dashboards/administrador/docentes",
-        icono: "bi-person-badge",
-      },
-      {
-        nombre: "Estudiantes",
-        ruta: "/dashboards/administrador/estudiantes",
-        icono: "bi-people",
-      },
-    ],
-  },
-  {
-    categoria: "TUTORÍAS",
-    items: [
-      {
-        nombre: "Supervisar Tutorías",
-        ruta: "/dashboards/administrador/tutorias",
-        icono: "bi-calendar-check",
-      },
-      {
-        nombre: "Reportes",
-        ruta: "/dashboards/administrador/reportes",
-        icono: "bi-file-earmark-bar-graph",
-      },
-    ],
-  },
-  {
-    categoria: "AGENTE IA",
-    items: [
-      {
-        nombre: "Métricas de uso IA",
-        ruta: "/dashboards/administrador/metricas",
-        icono: "bi-graph-up",
-      },
-      {
-        nombre: "Preguntas Frecuentes",
-        ruta: "/dashboards/administrador/faq",
-        icono: "bi-question-circle",
-      },
-      {
-        nombre: "Base de Conocimiento",
-        ruta: "/dashboards/administrador/conocimiento",
-        icono: "bi-database",
-      },
-    ],
-  },
-];
 
 const docentesIniciales = [
   {
@@ -222,10 +138,8 @@ export default function DocentesPage() {
 
   return (
     <div className="dashboard-layout">
-      <Sidebar titulo="Menu" menuEstructurado={menuAdminEstructurado} />
 
       <div className="dashboard-viewport">
-        <Header />
         <main className="main-content-body">
           {/* Encabezado */}
           <div className="docentes-header">
@@ -331,7 +245,7 @@ export default function DocentesPage() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="7" className="sin-resultados">
+                    <td colSpan={7} className="sin-resultados">
                       No se encontraron docentes.
                     </td>
                   </tr>

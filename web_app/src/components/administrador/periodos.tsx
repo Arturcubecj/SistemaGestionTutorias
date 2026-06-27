@@ -1,9 +1,7 @@
 import { useState } from "react";
-import Sidebar from "../Sidebar";
-import Header from "../Header";
 import Modal from "../Modal";
-import FormularioCarrera from "./academica/carreras/FormularioCarrera";
-import EliminarCarrera from "./academica/carreras/EliminarCarrera";
+import FormularioPeriodo from "./academica/periodos/FormularioPeriodo";
+import EliminarPeriodo from "./academica/periodos/EliminarPeriodo";
 
 const menuAdminEstructurado = [
   {
@@ -88,96 +86,85 @@ const menuAdminEstructurado = [
   },
 ];
 
-const carrerasIniciales = [
+const periodosIniciales = [
   {
     id: 1,
-    nombre: "Ingeniería en Software",
-    codigo: "ISW",
-    facultad: "Facultad de Ciencias Matemáticas y Físicas",
-    duracion: 5,
-    estado: "Activo",
+    nombre: "Periodo 2025-2026 CI",
+    codigo: "2025-CI",
+    fechaInicio: "2025-05-01",
+    fechaFin: "2025-09-30",
+    estado: "Cerrado",
   },
   {
     id: 2,
-    nombre: "Ingeniería en Sistemas",
-    codigo: "ISI",
-    facultad: "Facultad de Ciencias Matemáticas y Físicas",
-    duracion: 5,
-    estado: "Activo",
+    nombre: "Periodo 2025-2026 CII",
+    codigo: "2025-CII",
+    fechaInicio: "2025-10-01",
+    fechaFin: "2026-03-31",
+    estado: "Cerrado",
   },
   {
     id: 3,
-    nombre: "Ingeniería Industrial",
-    codigo: "IIN",
-    facultad: "Facultad de Ingeniería Industrial",
-    duracion: 5,
+    nombre: "Periodo 2026-2027 CI",
+    codigo: "2026-CI",
+    fechaInicio: "2026-05-01",
+    fechaFin: "2026-09-30",
     estado: "Activo",
   },
   {
     id: 4,
-    nombre: "Medicina",
-    codigo: "MED",
-    facultad: "Facultad de Ciencias Médicas",
-    duracion: 6,
-    estado: "Activo",
+    nombre: "Periodo 2026-2027 CII",
+    codigo: "2026-CII",
+    fechaInicio: "2026-10-01",
+    fechaFin: "2027-03-31",
+    estado: "Planificado",
   },
-  {
-    id: 5,
-    nombre: "Biología",
-    codigo: "BIO",
-    facultad: "Facultad de Ciencias Naturales",
-    duracion: 4,
-    estado: "Inactivo",
-  },
-];
-
-const facultadesDisponibles = [
-  "Facultad de Ciencias Matemáticas y Físicas",
-  "Facultad de Ciencias Naturales",
-  "Facultad de Filosofía, Letras y Ciencias de la Educación",
-  "Facultad de Ciencias Médicas",
-  "Facultad de Ingeniería Industrial",
 ];
 
 const formVacio = {
   nombre: "",
   codigo: "",
-  facultad: "",
-  duracion: "",
-  estado: "Activo",
+  fechaInicio: "",
+  fechaFin: "",
+  estado: "Planificado",
 };
 
-export default function CarrerasPage() {
-  const [carreras, setCarreras] = useState(carrerasIniciales);
+const colorEstado = {
+  Activo: { bg: "#dcfce7", color: "#16a34a" },
+  Planificado: { bg: "#dbeafe", color: "#1d4ed8" },
+  Cerrado: { bg: "#f1f5f9", color: "#475569" },
+};
+
+export default function PeriodosPage() {
+  const [periodos, setPeriodos] = useState(periodosIniciales);
   const [busqueda, setBusqueda] = useState("");
   const [modalAbierto, setModalAbierto] = useState(null);
   const [seleccionado, setSeleccionado] = useState(null);
   const [formData, setFormData] = useState(formVacio);
 
-  const carrerasFiltradas = carreras.filter(
-    (c) =>
-      c.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
-      c.codigo.toLowerCase().includes(busqueda.toLowerCase()) ||
-      c.facultad.toLowerCase().includes(busqueda.toLowerCase()),
+  const periodosFiltrados = periodos.filter(
+    (p) =>
+      p.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+      p.codigo.toLowerCase().includes(busqueda.toLowerCase()),
   );
 
   const abrirCrear = () => {
     setFormData(formVacio);
     setModalAbierto("crear");
   };
-  const abrirEditar = (c) => {
-    setSeleccionado(c);
+  const abrirEditar = (p) => {
+    setSeleccionado(p);
     setFormData({
-      nombre: c.nombre,
-      codigo: c.codigo,
-      facultad: c.facultad,
-      duracion: c.duracion,
-      estado: c.estado,
+      nombre: p.nombre,
+      codigo: p.codigo,
+      fechaInicio: p.fechaInicio,
+      fechaFin: p.fechaFin,
+      estado: p.estado,
     });
     setModalAbierto("editar");
   };
-  const abrirEliminar = (c) => {
-    setSeleccionado(c);
+  const abrirEliminar = (p) => {
+    setSeleccionado(p);
     setModalAbierto("eliminar");
   };
   const cerrarModal = () => {
@@ -193,75 +180,73 @@ export default function CarrerasPage() {
 
   const manejarCrear = (e) => {
     e.preventDefault();
-    setCarreras((prev) => [...prev, { id: Date.now(), ...formData }]);
+    setPeriodos((prev) => [...prev, { id: Date.now(), ...formData }]);
     cerrarModal();
   };
 
   const manejarEditar = (e) => {
     e.preventDefault();
-    setCarreras((prev) =>
-      prev.map((c) => (c.id === seleccionado.id ? { ...c, ...formData } : c)),
+    setPeriodos((prev) =>
+      prev.map((p) => (p.id === seleccionado.id ? { ...p, ...formData } : p)),
     );
     cerrarModal();
   };
 
   const manejarEliminar = () => {
-    setCarreras((prev) => prev.filter((c) => c.id !== seleccionado.id));
+    setPeriodos((prev) => prev.filter((p) => p.id !== seleccionado.id));
     cerrarModal();
   };
 
   return (
     <div className="dashboard-layout">
-      <Sidebar titulo="Menu" menuEstructurado={menuAdminEstructurado} />
 
       <div className="dashboard-viewport">
-        <Header />
         <main className="main-content-body">
           {/* Encabezado */}
-          <div className="carreras-header">
+          <div className="periodos-header">
             <div>
-              <h2 className="carreras-title">Carreras</h2>
-              <p className="carreras-subtitle">
-                Gestión de carreras registradas en el sistema.
+              <h2 className="periodos-title">Periodos Académicos</h2>
+              <p className="periodos-subtitle">
+                Gestión de periodos académicos registrados en el sistema.
               </p>
             </div>
 
-            <button onClick={abrirCrear} className="btn-nueva-carrera">
+            <button onClick={abrirCrear} className="btn-nuevo-periodo">
               <i className="bi bi-plus-lg"></i>
-              Nueva Carrera
+              Nuevo Periodo
             </button>
           </div>
 
           {/* Buscador */}
-          <div className="carreras-search-container">
-            <div className="carreras-search-box">
+          <div className="periodos-search-container">
+            <div className="periodos-search-box">
               <i className="bi bi-search"></i>
 
               <input
                 type="text"
-                placeholder="Buscar carrera..."
+                placeholder="Buscar periodo..."
                 value={busqueda}
                 onChange={(e) => setBusqueda(e.target.value)}
-                className="carreras-search-input"
+                className="periodos-search-input"
               />
             </div>
           </div>
 
           {/* Tabla */}
-          <div className="carreras-table-container">
-            <table className="carreras-table">
+          <div className="periodos-table-container">
+            <table className="periodos-table">
               <thead>
-                <tr className="carreras-table-header-row">
+                <tr className="periodos-table-header-row">
                   {[
                     "#",
                     "Nombre",
                     "Código",
-                    "Facultad",
-                    "Duración (años)",
+                    "Fecha Inicio",
+                    "Fecha Fin",
                     "Estado",
                     "Acciones",
                   ].map((h) => (
-                    <th key={h} className="carreras-table-header">
+                    <th key={h} className="periodos-table-header">
                       {h}
                     </th>
                   ))}
@@ -269,31 +254,31 @@ export default function CarrerasPage() {
               </thead>
 
               <tbody>
-                {carrerasFiltradas.length > 0 ? (
-                  carrerasFiltradas.map((c, i) => (
-                    <tr key={c.id} className="carreras-table-row">
-                      <td className="carreras-table-cell">{i + 1}</td>
-                      <td className="carreras-table-cell">{c.nombre}</td>
-                      <td className="carreras-table-cell">{c.codigo}</td>
-                      <td className="carreras-table-cell">{c.facultad}</td>
-                      <td className="carreras-table-cell">{c.duracion}</td>
+                {periodosFiltrados.length > 0 ? (
+                  periodosFiltrados.map((p, i) => (
+                    <tr key={p.id} className="periodos-table-row">
+                      <td className="periodos-table-cell">{i + 1}</td>
+                      <td className="periodos-table-cell">{p.nombre}</td>
+                      <td className="periodos-table-cell">{p.codigo}</td>
+                      <td className="periodos-table-cell">{p.fechaInicio}</td>
+                      <td className="periodos-table-cell">{p.fechaFin}</td>
 
-                      <td className="carreras-table-cell">
+                      <td className="periodos-table-cell">
                         <span
-                          className={`estado-badge ${
-                            c.estado === "Activo"
-                              ? "estado-activo"
-                              : "estado-inactivo"
-                          }`}
+                          className="estado-badge"
+                          style={{
+                            background: colorEstado[p.estado]?.bg,
+                            color: colorEstado[p.estado]?.color,
+                          }}
                         >
-                          {c.estado}
+                          {p.estado}
                         </span>
                       </td>
 
-                      <td className="carreras-table-cell">
+                      <td className="periodos-table-cell">
                         <div className="acciones-container">
                           <button
-                            onClick={() => abrirEditar(c)}
+                            onClick={() => abrirEditar(p)}
                             title="Editar"
                             className="btn-accion btn-editar"
                           >
@@ -301,7 +286,7 @@ export default function CarrerasPage() {
                           </button>
 
                           <button
-                            onClick={() => abrirEliminar(c)}
+                            onClick={() => abrirEliminar(p)}
                             title="Eliminar"
                             className="btn-accion btn-eliminar"
                           >
@@ -313,8 +298,8 @@ export default function CarrerasPage() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="7" className="sin-registros">
-                      No se encontraron carreras.
+                    <td colSpan={7} className="sin-registros">
+                      No se encontraron periodos.
                     </td>
                   </tr>
                 )}
@@ -327,40 +312,38 @@ export default function CarrerasPage() {
       <Modal
         isOpen={modalAbierto === "crear"}
         onClose={cerrarModal}
-        titulo="Nueva Carrera"
+        titulo="Nuevo Periodo Académico"
       >
-        <FormularioCarrera
+        <FormularioPeriodo
           formData={formData}
           onChange={manejarCambio}
           onSubmit={manejarCrear}
           onCancelar={cerrarModal}
           textoBoton="Guardar"
-          facultades={facultadesDisponibles}
         />
       </Modal>
 
       <Modal
         isOpen={modalAbierto === "editar"}
         onClose={cerrarModal}
-        titulo="Editar Carrera"
+        titulo="Editar Periodo Académico"
       >
-        <FormularioCarrera
+        <FormularioPeriodo
           formData={formData}
           onChange={manejarCambio}
           onSubmit={manejarEditar}
           onCancelar={cerrarModal}
           textoBoton="Guardar Cambios"
-          facultades={facultadesDisponibles}
         />
       </Modal>
 
       <Modal
         isOpen={modalAbierto === "eliminar"}
         onClose={cerrarModal}
-        titulo="Eliminar Carrera"
+        titulo="Eliminar Periodo Académico"
       >
-        <EliminarCarrera
-          carrera={seleccionado}
+        <EliminarPeriodo
+          periodo={seleccionado}
           onConfirmar={manejarEliminar}
           onCancelar={cerrarModal}
         />
