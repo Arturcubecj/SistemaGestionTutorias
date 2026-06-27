@@ -3,16 +3,21 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router'; 
 import { login, getToken } from '../lib/api';
 
-
+interface LoginResponse {
+  result: boolean;
+  rol?: string;    
+  message?: string; 
+}
 
 function LoginForm() {
   const router = useRouter();
-  const [usuario, setUsuario] = useState('');
-  const [clave, setClave] = useState('');
-  const [error, setError] = useState('');
-  const [info, setInfo] = useState('');
-  const [cargando, setCargando] = useState(false);
-  const [verClave, setVerClave] = useState(false);
+  
+  const [usuario, setUsuario] = useState<string>('');
+  const [clave, setClave] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const [info, setInfo] = useState<string>('');
+  const [cargando, setCargando] = useState<boolean>(false);
+  const [verClave, setVerClave] = useState<boolean>(false);
 
   useEffect(() => {
     if (router.query.expirado) {
@@ -28,22 +33,27 @@ function LoginForm() {
       return;
     }
     setCargando(true);
-    const res = await login(usuario.trim(), clave);
+    
+    const res: LoginResponse = await login(usuario.trim(), clave);
     setCargando(false);
 
     if (res.result) {
-      localStorage.setItem('role', res.rol); 
+      if (res.rol) {
+        localStorage.setItem('role', res.rol); 
 
-      if (res.rol === 'admin') {
-        router.replace('/dashboards/admin');
-      } else if (res.rol === 'coordinador') {
-        router.replace('/dashboards/coordinador');
-      } else if (res.rol === 'docente') {
-        router.replace('/dashboards/docente');
-      } else if (res.rol === 'estudiante') {
-        router.replace('/dashboards/estudiante');
+        if (res.rol === 'admin') {
+          router.replace('/dashboards/admin');
+        } else if (res.rol === 'coordinador') {
+          router.replace('/dashboards/coordinador');
+        } else if (res.rol === 'docente') {
+          router.replace('/dashboards/docente');
+        } else if (res.rol === 'estudiante') {
+          router.replace('/dashboards/estudiante');
+        } else {
+          setError('Rol no reconocido en el sistema.');
+        }
       } else {
-        setError('Rol no reconocido en el sistema.');
+         setError('Error: El sistema no devolvió ningún rol.');
       }
     } else {
       setError(res.message || 'Credenciales no válidas.');
@@ -65,7 +75,8 @@ function LoginForm() {
             id="usuario"
             type="text"
             value={usuario}
-            onChange={(e) => setUsuario(e.target.value)}
+            // 4. 🎯 Tipamos el evento 'e' para decirle que viene de un Input HTML
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsuario(e.target.value)}
             placeholder="ej. aespinosa"
             autoComplete="username"
           />
@@ -78,8 +89,8 @@ function LoginForm() {
               id="clave"
               type={verClave ? 'text' : 'password'}
               value={clave}
-              onChange={(e) => setClave(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && entrar()}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setClave(e.target.value)}
+              onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && entrar()}
               autoComplete="current-password"
               className="password-input"
             />

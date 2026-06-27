@@ -1,9 +1,10 @@
+'use client';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 export default function Header() {
   const router = useRouter();
-  const [rol, setRol] = useState('');
+  const [rol, setRol] = useState<string>('');
 
   useEffect(() => {
     const savedRole = localStorage.getItem('role');
@@ -12,7 +13,8 @@ export default function Header() {
     }
   }, []);
 
-  const salir = () => {
+
+  const salir = (): void => {
     localStorage.clear();
     router.replace('/login');
   };
@@ -23,7 +25,6 @@ export default function Header() {
         Sistema de Gestión de Tutorías Académicas
       </div>
       <div className="header-user-zone">
-
         <span className="user-role-badge">{rol || 'CARGANDO...'}</span>
         <button className="btn-cerrar-sesion" onClick={salir}>
           Cerrar sesión
