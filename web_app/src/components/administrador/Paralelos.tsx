@@ -1,44 +1,27 @@
 import { useState } from "react";
-import Sidebar from "../Sidebar";
-import Header from "../Header";
 import Modal from "../Modal";
 import FormularioParalelo from "./academica/cursos/FormularioParalelo";
 import EliminarParalelo from "./academica/cursos/EliminarParalelo";
 
-const menuCoordinadorEstructurado = [
-  {
-    categoria: "GENERAL",
-    items: [
-      { nombre: "Inicio", ruta: "/dashboards/coordinador", icono: "bi-house-door" },
-    ],
-  },
-  {
-    categoria: "ADMINISTRACIÓN ACADÉMICA",
-    items: [
-      { nombre: "Docentes", ruta: "/dashboards/coordinador/docentes", icono: "bi-person-badge" },
-      { nombre: "Estudiantes", ruta: "/dashboards/coordinador/estudiantes", icono: "bi-people" },
-      { nombre: "Asignaturas", ruta: "/dashboards/coordinador/asignaturas", icono: "bi-book" },
-      { nombre: "Paralelos", ruta: "/dashboards/coordinador/paralelos", icono: "bi-diagram-3" },
-      { nombre: "Periodos Académicos", ruta: "/dashboards/coordinador/periodos", icono: "bi-calendar3" },
-    ],
-  },
-  {
-    categoria: "TUTORÍAS",
-    items: [
-      { nombre: "Supervisar Tutorías", ruta: "/dashboards/coordinador/tutorias", icono: "bi-calendar-check" },
-      { nombre: "Reportes", ruta: "/dashboards/coordinador/reportes", icono: "bi-file-earmark-bar-graph" },
-      { nombre: "Casos Escalados", ruta: "/dashboards/coordinador/casos-escalados", icono: "bi-exclamation-circle" },
-    ],
-  },
-  {
-    categoria: "AGENTE IA",
-    items: [
-      { nombre: "Métricas de uso IA", ruta: "/dashboards/coordinador/metricas", icono: "bi-graph-up" },
-      { nombre: "Preguntas Frecuentes", ruta: "/dashboards/coordinador/faq", icono: "bi-question-circle" },
-      { nombre: "Base de Conocimiento", ruta: "/dashboards/coordinador/conocimiento", icono: "bi-database" },
-    ],
-  },
-];
+type Paralelo = {
+  id: number;
+  nombre: string;
+  asignatura: string;
+  docente: string;
+  periodo: string;
+  capacidad: number;
+  estado: string;
+};
+
+type FormDataParalelo = {
+  nombre: string;
+  asignatura: string;
+  docente: string;
+  periodo: string;
+  capacidad: string;
+  estado: string;
+};
+
 
 const asignaturasDisponibles = [
   "Desarrollo de Aplicaciones Web",
@@ -61,13 +44,13 @@ const periodosDisponibles = [
   "2026-2027 CI",
 ];
 
-const paralelosIniciales = [
+const paralelosIniciales: Paralelo[] = [
   { id: 1, nombre: "Paralelo A", asignatura: "Desarrollo de Aplicaciones Web", docente: "Dr. Carlos Mendoza", periodo: "2026-2027 CI", capacidad: 35, estado: "Activo" },
   { id: 2, nombre: "Paralelo B", asignatura: "Base de Datos", docente: "Ing. Patricia Vega", periodo: "2026-2027 CI", capacidad: 30, estado: "Activo" },
   { id: 3, nombre: "Paralelo A", asignatura: "Estructuras de Datos", docente: "Msc. Roberto Alvarado", periodo: "2025-2026 CII", capacidad: 40, estado: "Inactivo" },
 ];
 
-const formVacio = {
+const formVacio: FormDataParalelo = {
   nombre: "",
   asignatura: "",
   docente: "",
@@ -77,11 +60,11 @@ const formVacio = {
 };
 
 export default function ParalelosPage() {
-  const [paralelos, setParalelos] = useState(paralelosIniciales);
+  const [paralelos, setParalelos] = useState<Paralelo[]>(paralelosIniciales);
   const [busqueda, setBusqueda] = useState("");
-  const [modalAbierto, setModalAbierto] = useState(null);
-  const [seleccionado, setSeleccionado] = useState(null);
-  const [formData, setFormData] = useState(formVacio);
+  const [modalAbierto, setModalAbierto] = useState<"crear" | "editar" | "eliminar" | null>(null);
+  const [seleccionado, setSeleccionado] = useState<Paralelo | null>(null);
+  const [formData, setFormData] = useState<FormDataParalelo>(formVacio);
 
   const paralelosFiltrados = paralelos.filter(
     (p) =>
@@ -95,19 +78,19 @@ export default function ParalelosPage() {
     setFormData(formVacio);
     setModalAbierto("crear");
   };
-  const abrirEditar = (p) => {
+  const abrirEditar = (p: Paralelo) => {
     setSeleccionado(p);
     setFormData({
       nombre: p.nombre,
       asignatura: p.asignatura,
       docente: p.docente,
       periodo: p.periodo,
-      capacidad: p.capacidad,
+      capacidad: String(p.capacidad),
       estado: p.estado,
     });
     setModalAbierto("editar");
   };
-  const abrirEliminar = (p) => {
+  const abrirEliminar = (p: Paralelo) => {
     setSeleccionado(p);
     setModalAbierto("eliminar");
   };
@@ -117,36 +100,38 @@ export default function ParalelosPage() {
     setFormData(formVacio);
   };
 
-  const manejarCambio = (e) => {
+  const manejarCambio = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const manejarCrear = (e) => {
+  const manejarCrear = (e: React.FormEvent) => {
     e.preventDefault();
-    setParalelos((prev) => [...prev, { id: Date.now(), ...formData }]);
+    setParalelos((prev) => [...prev, { id: Date.now(), ...formData, capacidad: Number(formData.capacidad) }]);
     cerrarModal();
   };
 
-  const manejarEditar = (e) => {
+  const manejarEditar = (e: React.FormEvent) => {
     e.preventDefault();
     setParalelos((prev) =>
-      prev.map((p) => (p.id === seleccionado.id ? { ...p, ...formData } : p))
+      prev.map((p) =>
+        p.id === seleccionado?.id
+          ? { ...p, ...formData, capacidad: Number(formData.capacidad) }
+          : p
+      )
     );
     cerrarModal();
   };
 
   const manejarEliminar = () => {
-    setParalelos((prev) => prev.filter((p) => p.id !== seleccionado.id));
+    setParalelos((prev) => prev.filter((p) => p.id !== seleccionado?.id));
     cerrarModal();
   };
 
   return (
     <div className="dashboard-layout">
-      <Sidebar titulo="Menu" menuEstructurado={menuCoordinadorEstructurado} />
 
       <div className="dashboard-viewport">
-        <Header />
         <main className="main-content-body">
           <div className="estudiantes-header">
             <div>
@@ -212,7 +197,7 @@ export default function ParalelosPage() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="8" className="estudiantes-sin-resultados">
+                    <td colSpan={8} className="estudiantes-sin-resultados">
                       No se encontraron paralelos.
                     </td>
                   </tr>

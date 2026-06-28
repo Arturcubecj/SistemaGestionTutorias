@@ -7,17 +7,19 @@ import ReporteTutorias from "../../components/administrador/inicio/ReporteTutori
 import GestionUsuarios from "../../components/administrador/inicio/GestionUsuarios";
 import MetricasIA from "../../components/administrador/inicio/MetricasIA";
 //Componentes de cada página
-import Facultades from "../../components/administrador/facultades";
-import Carreras from "../../components/administrador/carreras";
-import Asignaturas from "../../components/administrador/asignaturas";
-import Periodos from "../../components/administrador/periodos";
-import Docentes from "../../components/administrador/docentes";
-import Estudiantes from "../../components/administrador/estudiantes";
-import SupervisarTutorias from "../../components/administrador/tutorias";
-import Reportes from "../../components/administrador/reportes";
-import MetricasUsoIA from "../../components/administrador/metricas";
-import PreguntasFrecuentes from "../../components/administrador/faq";
-import BaseConocimiento from "../../components/administrador/conocimiento";
+import Facultades from "../../components/administrador/Facultades";
+import Carreras from "../../components/administrador/Carreras";
+import Asignaturas from "../../components/administrador/Asignaturas";
+import Periodos from "../../components/administrador/Periodos";
+import Docentes from "../../components/administrador/Docentes";
+import Estudiantes from "../../components/administrador/Estudiantes";
+import SupervisarTutorias from "../../components/administrador/Tutorias";
+import Reportes from "../../components/administrador/Reportes";
+import MetricasUsoIA from "../../components/administrador/Metricas";
+import PreguntasFrecuentes from "../../components/administrador/Faq";
+import BaseConocimiento from "../../components/administrador/Conocimiento";
+import Usuarios from "../../components/administrador/Usuarios";
+import Paralelos from "../../components/administrador/Paralelos";
 
 export default function AdminDashboard() {
   const [rol, setRol] = useState("");
@@ -75,7 +77,23 @@ export default function AdminDashboard() {
           icono: "bi-people",
           accion: () => setVistaActual("estudiantes"),
         },
+        {
+          nombre: "Paralelos",
+          ruta: "#",
+          icono: "bi-collection",
+          accion: () => setVistaActual("paralelos"),
+        },
       ],
+    },
+    {
+      categoria: 'SEGURIDAD',
+      items: [
+        { nombre: 'Usuarios', 
+          ruta: '#', 
+          icono: 'bi-person-gear' ,
+          accion: () => setVistaActual('usuarios'),
+        },
+      ]
     },
     {
       categoria: "TUTORÍAS",
@@ -183,7 +201,8 @@ export default function AdminDashboard() {
           {vistaActual === "metricas-ia" && <MetricasUsoIA />}
           {vistaActual === "faq" && <PreguntasFrecuentes />}
           {vistaActual === "conocimiento" && <BaseConocimiento />}
-
+          {vistaActual === "usuarios" && <Usuarios />}
+          {vistaActual === "paralelos" && <Paralelos />}
         </main>
       </div>
 

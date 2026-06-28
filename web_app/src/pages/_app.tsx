@@ -15,6 +15,7 @@ import '../styles/Administrador/facultades.css';
 import '../styles/Administrador/inicio.css';  
 import '../styles/Administrador/periodos.css'; 
 import '../styles/Administrador/tutorias.css'; 
+import '../styles/Administrador/usuarios.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
