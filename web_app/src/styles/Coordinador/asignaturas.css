@@ -1,0 +1,229 @@
+.asig-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+}
+
+.asig-title {
+    margin: 0;
+}
+
+.asig-subtitle {
+    color: #64748b;
+    margin-top: 4px;
+    margin-bottom: 0;
+}
+
+.asig-btn-volver {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: .9rem;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.asig-btn-volver:hover {
+    background: #f8fafc;
+}
+
+
+.asig-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.asig-filtros {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.asig-filtro-btn {
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: .82rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid #e2e8f0;
+    background: white;
+    color: #475569;
+    transition: all .2s;
+}
+
+.asig-filtro-btn.activo {
+    background: #1a1740;
+    color: white;
+    border: none;
+}
+
+.asig-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 8px 14px;
+    width: 280px;
+    color: #64748b;
+}
+
+.asig-search input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #334155;
+    font-size: .9rem;
+}
+
+
+.asig-table-container {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.asig-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .9rem;
+}
+
+.asig-table thead tr {
+    background: #f1f5f9;
+}
+
+.asig-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: #475569;
+    font-size: .82rem;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.asig-table tbody tr {
+    border-top: 1px solid #f1f5f9;
+}
+
+.asig-table td {
+    padding: 14px 16px;
+    color: #334155;
+}
+
+.asig-bold {
+    font-weight: 500;
+}
+
+.asig-muted {
+    color: #64748b !important;
+}
+
+.asig-empty {
+    text-align: center;
+    padding: 40px;
+    color: #94a3b8;
+}
+
+
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+.badge-activo {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.badge-inactivo {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.badge-codigo {
+    background: #ede9fe;
+    color: #7c3aed;
+    padding: 3px 12px;
+}
+
+
+.btn-detalle {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    color: #6366f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn-detalle:hover {
+    background: #f8fafc;
+}
+
+
+.asig-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.asig-modal-badges {
+    display: flex;
+    gap: 8px;
+}
+
+.asig-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.asig-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+.asig-card-label {
+    font-size: .75rem;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-bottom: 4px;
+}
+
+.asig-card-label i {
+    margin-right: 5px;
+}
+
+.asig-card-value {
+    color: #1e293b;
+    font-size: .9rem;
+    font-weight: 500;
+}
