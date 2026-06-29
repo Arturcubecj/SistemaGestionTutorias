@@ -6,7 +6,9 @@ import Modal from "../../components/Modal";
 import AsignaturasCoordinador from "../../components/coordinador/AsignaturasCoordinador";
 import DocentesCoordinador from "../../components/coordinador/DocentesCoordinador";
 import EstudiantesCoordinador from "../../components/coordinador/EstudiantesCoordinador";
-import SupervisarTutoriasCoordinador from '../../components/coordinador/SupervisarTutoriasCoordinador';
+import SupervisarTutoriasCoordinador from "../../components/coordinador/SupervisarTutoriasCoordinador";
+import ReportesCoordinador from "../../components/coordinador/ReportesCoordinador";
+import AsistenteIACoordinador from "../../components/coordinador/AsistenteIACoordinador";
 
 const summaryCards = [
   {
@@ -250,24 +252,16 @@ export default function CoordinadorDashboard() {
           {vistaActual === "estudiantes" && (
             <EstudiantesCoordinador onVolver={() => setVistaActual("inicio")} />
           )}
-          {vistaActual === 'supervisar' && (
-  <SupervisarTutoriasCoordinador onVolver={() => setVistaActual('inicio')} />
-)}
-          {vistaActual === "reportes" && (
-            <PlaceholderVista
-              titulo="Reportes"
-              descripcion="Reportes y estadísticas académicas."
-              icono="bi-file-earmark-bar-graph"
+          {vistaActual === "supervisar" && (
+            <SupervisarTutoriasCoordinador
               onVolver={() => setVistaActual("inicio")}
             />
           )}
+          {vistaActual === "reportes" && (
+            <ReportesCoordinador onVolver={() => setVistaActual("inicio")} />
+          )}
           {vistaActual === "ia" && (
-            <PlaceholderVista
-              titulo="Asistente IA"
-              descripcion="Chat con el agente de inteligencia artificial."
-              icono="bi-cpu"
-              onVolver={() => setVistaActual("inicio")}
-            />
+            <AsistenteIACoordinador onVolver={() => setVistaActual("inicio")} />
           )}
         </main>
       </div>

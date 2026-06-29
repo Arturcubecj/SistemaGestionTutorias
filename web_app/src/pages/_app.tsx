@@ -21,6 +21,8 @@ import '../styles/Coordinador/asignaturas.css';
 import '../styles/Coordinador/docentes.css';
 import '../styles/Coordinador/estudiantes.css';
 import '../styles/Coordinador/tutorias.css';
+import '../styles/Coordinador/reportes.css';
+import '../styles/Coordinador/asistenteia.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
