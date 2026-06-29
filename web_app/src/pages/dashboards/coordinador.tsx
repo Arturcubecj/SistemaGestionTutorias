@@ -6,6 +6,7 @@ import Modal from "../../components/Modal";
 import AsignaturasCoordinador from "../../components/coordinador/AsignaturasCoordinador";
 import DocentesCoordinador from "../../components/coordinador/DocentesCoordinador";
 import EstudiantesCoordinador from "../../components/coordinador/EstudiantesCoordinador";
+import SupervisarTutoriasCoordinador from '../../components/coordinador/SupervisarTutoriasCoordinador';
 
 const summaryCards = [
   {
@@ -249,14 +250,9 @@ export default function CoordinadorDashboard() {
           {vistaActual === "estudiantes" && (
             <EstudiantesCoordinador onVolver={() => setVistaActual("inicio")} />
           )}
-          {vistaActual === "supervisar" && (
-            <PlaceholderVista
-              titulo="Supervisar Tutorías"
-              descripcion="Seguimiento de tutorías académicas."
-              icono="bi-calendar-check"
-              onVolver={() => setVistaActual("inicio")}
-            />
-          )}
+          {vistaActual === 'supervisar' && (
+  <SupervisarTutoriasCoordinador onVolver={() => setVistaActual('inicio')} />
+)}
           {vistaActual === "reportes" && (
             <PlaceholderVista
               titulo="Reportes"
