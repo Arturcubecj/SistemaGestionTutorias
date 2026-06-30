@@ -1,0 +1,20 @@
+.bitacora-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.bitacora-content strong {
+  color: #1e293b;
+}
+
+.bitacora-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.buscador-bitacora {
+  margin-top: 10px;
+  width: 300px;
+}

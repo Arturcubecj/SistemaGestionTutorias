@@ -61,7 +61,7 @@ export default function EstudianteDashboard() {
       hora: datosFormulario?.hora || 'Sin hora',       
       motivo: datosFormulario?.motivo || 'Sin motivo especificado', 
       docente: 'No asignado',
-      estado: 'Pendiente',
+      estado: 'Pendiente'
     };
 
     const nuevaLista = [nuevaTutoria, ...listaSolicitudes];

@@ -75,7 +75,6 @@ function LoginForm() {
             id="usuario"
             type="text"
             value={usuario}
-            // 4. 🎯 Tipamos el evento 'e' para decirle que viene de un Input HTML
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsuario(e.target.value)}
             placeholder="ej. aespinosa"
             autoComplete="username"
@@ -103,11 +102,16 @@ function LoginForm() {
           </div>
         </div>
 
-        <button className="btn btn-login" onClick={entrar} disabled={cargando}>
-          {cargando ? 'Verificando…' : 'Entrar al sistema'}
-        </button>
+        <button className="btn btn-login" onClick={entrar} disabled={cargando}>{cargando ? 'Verificando…' : 'Entrar al sistema'}</button>
 
-        <button className="btn btn-reset">Restablecer contraseña</button>
+        <a 
+          href="#" 
+          className="link-restablecer"
+          onClick={(e) => {
+            e.preventDefault(); 
+           router.push('/restablecer'); 
+          }}
+        >¿Olvidaste tu contraseña?</a>
 
         <div className="login-demo">
           Cuentas de demostración:<br />

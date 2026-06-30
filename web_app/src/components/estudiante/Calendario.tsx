@@ -6,7 +6,7 @@ interface CalendarioProps {
 }
 
 export default function CalendarioTutorias({ solicitudes = [] }: CalendarioProps) {
-  const tutoriasConfirmadas: Tutoria[] = solicitudes.filter(sol => sol.estado === 'Aceptada');
+  const tutoriasConfirmadas: Tutoria[] = solicitudes.filter(sol => sol.estado === 'Confirmada');
 
   const abrirClaseVirtual = (): void => {
     alert('ZOOM UWU');

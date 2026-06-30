@@ -94,9 +94,8 @@ body {
     margin-top: 0.5em; 
 }
 .btn-login:hover { 
-    background-color: #ffffff; 
-    color: #000000; 
-    border: 1px solid #000000; 
+    background-color: #6A61E5; 
+    color: #ffffff; 
 }
 
 
@@ -115,11 +114,7 @@ body {
   margin-right:auto;
 }
 
-.btn-reset:hover { 
-    background-color: #ffffff; 
-    color: #000000; 
-    border: 1px solid #000000;
- }
+
 
 .btn-reset:disabled { 
     background-color: #93c5fd; 
@@ -172,11 +167,30 @@ body {
   align-items: center;
 }
 
-/* CSS PARA LOS OJOS */
 .ojoabierto {
   color: #3d35a1;
 }
 
 .ojocerrado {
   color: #3d35a1;
+}
+
+.link-restablecer {
+  display: block;
+  text-align: center;
+  margin: 15px 0;
+  color: #3d35a1;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.link-restablecer:hover {
+  text-decoration: underline;
+  color: #0284c7;
+}
+
+.volver-container {
+  margin-top: 30px;
 }
