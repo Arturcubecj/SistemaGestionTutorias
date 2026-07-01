@@ -68,9 +68,7 @@ export default function Bitacoras() {
             onChange={(e) => setBusqueda(e.target.value)}
           />
         </div>
-        <button className="btn-agregar-horario" onClick={() => setIsModalOpen(true)}>
-          + Nueva Bitácora
-        </button>
+        <button className="btn-agregar-horario" onClick={() => setIsModalOpen(true)}>+ Nueva Bitácora</button>
       </div>
 
       <div className="horarios-lista">

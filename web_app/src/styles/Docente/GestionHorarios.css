@@ -27,7 +27,7 @@
 }
 
 .btn-agregar-horario {
-  background-color: #2563eb;
+  background-color: #3d35a1;
   color: #ffffff;
   border: none;
   padding: 10px 20px;
@@ -38,7 +38,7 @@
 }
 
 .btn-agregar-horario:hover {
-  background-color: #1d4ed8;
+  background-color: #6366f1;
 }
 
 .horarios-lista ul {

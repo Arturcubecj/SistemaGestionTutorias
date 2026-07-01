@@ -91,10 +91,29 @@ export default function EstudianteDashboard() {
               <h2>Hola, bienvenido {rol}</h2> 
               <p className="dashboard-subtitle">Panel de control para la gestión de tus tutorías académicas.</p>
               <div className="dashboard-grid">
+                
                 <section className="dashboard-card-panel">
-                  <h3>Mis tutorías programadas</h3>
-                  <div className="empty-state">No tienes tutorías pendientes para esta semana.</div>
+                  <h3>Mis tutorías Programadas</h3>
+
+                  {listaSolicitudes.filter(t => t.estado === 'Confirmada' || t.estado === 'Programada').length === 0 ? (
+                    <div className="empty-state">No tienes tutorías programadas para esta semana.</div>
+                  ) : (
+                    <div className="lista-tutorias-programadas">
+                      {listaSolicitudes
+                        .filter(t => t.estado === 'Confirmada' || t.estado === 'Programada')
+                        .map((tutoria) => (
+                        <div key={tutoria.id} className="tutoria-item">
+                          <strong>{tutoria.asignatura}</strong>
+                          <p className="tutoria-info">
+                            <i className="bi bi-calendar-event"></i> {tutoria.fecha} | <i className="bi bi-clock"></i> {tutoria.hora}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </section>
+
+
                 <aside className="dashboard-card-panel">
                   <h3>Acciones rápidas</h3>
                   <div className="quick-actions-list">

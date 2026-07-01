@@ -220,3 +220,52 @@
   color: #ffffff;
   border: 1px solid #d4af37; 
 }
+
+
+.lista-tutorias-programadas {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.tutoria-item {
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 12px;
+}
+
+
+.tutoria-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.tutoria-info {
+  margin: 5px 0;
+  color: #6c757d;
+  font-size: 0.9em;
+}
+
+.tutoria-info i {
+  margin-right: 5px;
+}
+
+.estado-badge {
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+
+.estado-badge.pendiente {
+  color: #d97706; 
+  background-color: #fef3c7; 
+}
+
+.estado-badge.programada, 
+.estado-badge.aceptada {
+  color: #059669; 
+  background-color: #d1fae5; 
+}
+
