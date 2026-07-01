@@ -95,7 +95,7 @@ export default function Bitacoras() {
           <div className="campo-grupo">
             <label>Seleccionar Sesión Finalizada:</label>
             <select className="horarios-input" value={tutoriaSeleccionada} onChange={(e) => setTutoriaSeleccionada(e.target.value)}>
-              <option value="">-- Selecciona una sesión --</option>
+              <option value="">Selecciona Una Sesión</option>
               {tutoriasFinalizadas.length > 0 ? (
                 tutoriasFinalizadas.map((t, idx) => (
                   <option key={idx} value={`${t.asignatura} | ${t.fecha} | ${t.hora}`}>

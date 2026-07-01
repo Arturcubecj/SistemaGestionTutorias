@@ -106,7 +106,7 @@ export default function FormularioSolicitud({ onCancelar, onExito }: FormProps) 
           onChange={manejarCambio} 
           required
         >
-          <option value="">-- Selecciona la materia --</option>
+          <option value="">Selecciona la Materia</option>
           {materiasUnicas.length > 0 ? (
             materiasUnicas.map((materia, index) => (
               <option key={index} value={materia}>{materia}</option>
@@ -118,7 +118,7 @@ export default function FormularioSolicitud({ onCancelar, onExito }: FormProps) 
       </div>
 
       <div className="form-group">
-        <label htmlFor="horarioSeleccionado">Horarios disponibles</label>
+        <label htmlFor="horarioSeleccionado">Horarios Disponibles</label>
         <select 
           id="horarioSeleccionado" 
           name="horarioSeleccionado" 
@@ -128,7 +128,7 @@ export default function FormularioSolicitud({ onCancelar, onExito }: FormProps) 
           required
           disabled={!formData.asignatura} 
         >
-          <option value="">-- Selecciona una franja horaria --</option>
+          <option value="">Selecciona un horario disponible</option>
           {horariosFiltrados.length > 0 ? (
             horariosFiltrados.map((h, index) => (
               <option key={index} value={`${h.fecha}|${h.inicio}`}>
@@ -144,7 +144,7 @@ export default function FormularioSolicitud({ onCancelar, onExito }: FormProps) 
       </div>
 
       <div className="form-group">
-        <label htmlFor="motivo">Motivo o duda académica</label>
+        <label htmlFor="motivo">Motivo o Duda Académica</label>
         <textarea 
           id="motivo" 
           name="motivo" 
